@@ -1,0 +1,880 @@
+  Wed Apr 14 2021  0:19                                                                                                    Page 1
+
+
+                                               ***************************************
+                                               **      WDC 65C816 Macro Assembler   **
+                                               **                                   **
+                                               **     Version 3.49.1- Feb  6 2006    **
+                                               ***************************************
+
+     1                        ;:ts=8
+     2             00000001   R0	equ	1
+     3             00000005   R1	equ	5
+     4             00000009   R2	equ	9
+     5             0000000D   R3	equ	13
+     6                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.c",0
+     7                        ;/*============================================================================*
+     8                        ; * __        ____  ____   ____ ___  _  __  ______  ______                     *
+     9                        ; * \ \      / / /_| ___| / ___( _ )/ |/ /_/ ___\ \/ / __ )                    *
+    10                        ; *  \ \ /\ / / '_ \___ \| |   / _ \| | '_ \___ \\  /|  _ \                    *
+    11                        ; *   \ V  V /| (_) |__) | |__| (_) | | (_) |__) /  \| |_) |                   *
+    12                        ; *    \_/\_/  \___/____/ \____\___/|_|\___/____/_/\_\____/                    *                      
+                                     
+    13                        ; *                                                                            *
+    14                        ; * W65C816SXB Developer Board Definitions                                     *
+    15                        ; *----------------------------------------------------------------------------*
+    16                        ; * Copyright (C),2019 Andrew Jacobs                                           *
+    17                        ; * All rights reserved.                                                       *
+    18                        ; *                                                                            *
+    19                        ; * This work is made available under the terms of the Creative Commons        *
+    20                        ; * Attribution-NonCommercial-ShareAlike 4.0 International license. Open the   *
+    21                        ; * following URL to see the details.                                          *
+    22                        ; *                                                                            *
+    23                        ; * http://creativecommons.org/licenses/by-nc-sa/4.0/                          *
+    24                        ; *                                                                            *
+    25                        ; *============================================================================*
+    26                        ; * Notes:                                                                     *
+    27                        ; *                                                                            *
+    28                        ; * The user VIA is used to generate a regular 1KHz interrupt to update the    *
+    29                        ; * millisecond counter and T2 in system VIA is used to generate interrupts    *
+    30                        ; * to drive ACIA character transmission (as the transmit buffer empty bit is  *
+    31                        ; * broken).                                                                   * 
+    32                        ; *----------------------------------------------------------------------------*/
+    33                        ;
+    34                        ;#include "FMX.h"
+    35                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",0
+    36                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c816.h",0
+    37                        	.line	33
+    38                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",27
+    39                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c22.h",0
+    40                        	.file	"C:\WDC\Tools\INCLUDE\inttypes.h",0
+    41                        	.stag	fake1_,64,1
+    42                        	.member	quot,0,7,8,32
+    43                        	.member	rem,32,7,8,32
+    44                        	.eos
+    45                        	.line	111
+    46                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c22.h",27
+    47                        	.stag	fake2_,128,2
+    48                        	.member	orb,0,14,8,8
+    49                        	.member	ora,8,14,8,8
+    50                        	.member	ddrb,16,14,8,8
+    51                        	.member	ddra,24,14,8,8
+  Wed Apr 14 2021  0:19                                                                                                    Page 2
+
+
+    52                        	.member	t1cl,32,14,8,8
+    53                        	.member	t1ch,40,14,8,8
+    54                        	.member	t1ll,48,14,8,8
+    55                        	.member	t1lh,56,14,8,8
+    56                        	.member	t2cl,64,14,8,8
+    57                        	.member	t2ch,72,14,8,8
+    58                        	.member	sr,80,14,8,8
+    59                        	.member	acr,88,14,8,8
+    60                        	.member	pcr,96,14,8,8
+    61                        	.member	ifr,104,14,8,8
+    62                        	.member	ier,112,14,8,8
+    63                        	.member	oran,120,14,8,8
+    64                        	.eos
+    65                        	.line	142
+    66                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",28
+    67                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c21.h",0
+    68                        	.file	"C:\WDC\Tools\INCLUDE\inttypes.h",0
+    69                        	.line	111
+    70                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c21.h",27
+    71                        	.stag	fake3_,32,3
+    72                        	.member	pia,0,14,8,8
+    73                        	.member	cra,8,14,8,8
+    74                        	.member	pib,16,14,8,8
+    75                        	.member	crb,24,14,8,8
+    76                        	.eos
+    77                        	.line	81
+    78                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",29
+    79                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c51.h",0
+    80                        	.file	"C:\WDC\Tools\INCLUDE\inttypes.h",0
+    81                        	.line	111
+    82                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c51.h",29
+    83                        	.stag	fake4_,32,4
+    84                        	.member	buf,0,14,8,8
+    85                        	.member	sr,8,14,8,8
+    86                        	.member	cmd,16,14,8,8
+    87                        	.member	ctl,24,14,8,8
+    88                        	.eos
+    89                        	.line	117
+    90                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",30
+    91                        	.line	52
+    92                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.c",28
+    93                        ;
+    94                        ;#include <stdio.h>
+    95                        	.file	"C:\WDC\Tools\INCLUDE\stdio.h",0
+    96                        	.file	"C:\WDC\Tools\INCLUDE\stdarg.h",0
+    97                        	.line	51
+    98                        	.file	"C:\WDC\Tools\INCLUDE\stdio.h",40
+    99                        	.stag	__stdio,160,5
+   100                        	.member	_bp,0,142,8,32
+   101                        	.member	_bend,32,142,8,32
+   102                        	.member	_buff,64,142,8,32
+   103                        	.member	_flags,96,15,8,16
+   104                        	.member	_unit,112,14,8,8
+   105                        	.member	_bytbuf,120,14,8,8
+   106                        	.member	_buflen,128,16,8,16
+   107                        	.member	_tmpnum,144,15,8,16
+   108                        	.eos
+   109                        	.line	219
+  Wed Apr 14 2021  0:19                                                                                                    Page 3
+
+
+   110                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.c",30
+   111                        ;
+   112                        ;#define BAUD_RATE       9600
+   113                        ;
+   114                        ;#define MSB(XX)         (((XX) >> 8) & 0xff)
+   115                        ;#define LSB(XX)         (((XX) >> 0) & 0xff)
+   116                        ;
+   117                        ;#define MSEC_COUNT      (FCLK / 1000)
+   118                        ;#define BAUD_COUNT      (FCLK / (BAUD_RATE / 11))
+   119                        ;
+   120                        ;#if MSEC_COUNT & 0xffff0000ul
+   121                        ;#error "MSEC count does not fit in 16-bits"
+   122                        ;#endif
+   123                        ;
+   124                        ;#if BAUD_COUNT & 0xffff0000ul
+   125                        ;#error "BAUD count does not fit in 16-bits"
+   126                        ;#endif
+   127                        ;
+   128                        ;/* A simple FIFO queue */
+   129                        ;typedef struct {
+   130                        ;    uint8_t             head;
+   131                        ;    uint8_t             tail;
+   132                        ;    uint8_t             data [64];
+   133                        ;} fifo_t;
+   134                        	.stag	fake6_,528,6
+   135                        	.member	head,0,14,8,8
+   136                        	.member	tail,8,14,8,8
+   137                        	.member	data,16,110,8,0,64
+   138                        	.eos
+   139                        ;
+   140                        ;/* FIFOs for serial I/O */
+   141                        ;static volatile fifo_t  rx;
+   142                        ;static volatile fifo_t  tx;
+   143                        ;
+   144                        ;/* An incrementing counter */
+   145                        ;static volatile uint32_t ticks;
+   146                        ;
+   147                        ;/* Initialise the SXB board hardware */
+   148                        ;void initialise (void)
+   149                        ;{
+   150                        	.line	63
+   151                        	.line	64
+   152                        	code
+   153                        	xdef	~~initialise
+   154                        	func
+   155                        	.function	64
+   156                        ~~initialise:
+   157                        	longa	on
+   158                        	longi	on
+   159                        	.block	64
+   160                        ;    /* Set T1 for 1mS continuous */
+   161                        ;    VIA_ACR (USR_VIA) &= ~VIA_ACR_T1C_MASK;
+   162                        	.line	66
+   163 00:0000: E2 20        	sep	#$20
+   164                        	longa	off
+   165 00:0002: AF CB 7F 00  	lda	>32715	; volatile
+   166 00:0006: 29 3F        	and	#<$ffffff3f
+   167 00:0008: 8F CB 7F 00  	sta	>32715	; volatile
+  Wed Apr 14 2021  0:19                                                                                                    Page 4
+
+
+   168                        ;    VIA_ACR (USR_VIA) |= VIA_ACR_T1C_CONTINUOUS;
+   169                        	.line	67
+   170 00:000C: AF CB 7F 00  	lda	>32715	; volatile
+   171 00:0010: 09 40        	ora	#<$40
+   172 00:0012: 8F CB 7F 00  	sta	>32715	; volatile
+   173                        ;    VIA_IER (USR_VIA) = VIA_IER_SET_MASK | VIA_IER_T1_MASK;
+   174                        	.line	68
+   175 00:0016: A9 C0        	lda	#$c0
+   176 00:0018: 8F CE 7F 00  	sta	>32718	; volatile
+   177 00:001C: C2 20        	rep	#$20
+   178                        	longa	on
+   179                        ;    VIA_T1C (USR_VIA) = MSEC_COUNT;
+   180                        	.line	69
+   181 00:001E: A9 B0 36     	lda	#$36b0
+   182 00:0021: 8F C4 7F 00  	sta	>32708
+   183                        ;
+   184                        ;    /* Set T2 for serial delay */
+   185                        ;    VIA_ACR (SYS_VIA) &= ~VIA_ACR_T2C_MASK;
+   186                        	.line	72
+   187 00:0025: E2 20        	sep	#$20
+   188                        	longa	off
+   189 00:0027: AF EB 7F 00  	lda	>32747	; volatile
+   190 00:002B: 29 DF        	and	#<$ffffffdf
+   191 00:002D: 8F EB 7F 00  	sta	>32747	; volatile
+   192                        ;    VIA_ACR (SYS_VIA) |= VIA_ACR_T2C_TIMED_INTERRUPT;
+   193                        	.line	73
+   194 00:0031: AF EB 7F 00  	lda	>32747
+   195 00:0035: 8F EB 7F 00  	sta	>32747	; volatile
+   196                        ;    VIA_IER (SYS_VIA) = VIA_IER_SET_MASK | VIA_IER_T2_MASK;
+   197                        	.line	74
+   198 00:0039: A9 A0        	lda	#$a0
+   199 00:003B: 8F EE 7F 00  	sta	>32750	; volatile
+   200 00:003F: C2 20        	rep	#$20
+   201                        	longa	on
+   202                        ;    VIA_T2C (SYS_VIA) = BAUD_COUNT;
+   203                        	.line	75
+   204 00:0041: A9 B7 3E     	lda	#$3eb7
+   205 00:0044: 8F E8 7F 00  	sta	>32744
+   206                        ;
+   207                        ;    /* Set ACIA for 9600 8-N-1 */
+   208                        ;    ACIA_CTL (ACIA) = ACIA_CTL_SBN_1 | ACIA_CTL_WL_8 | ACIA_CTL_RCS_BAUD | ACIA_CTL_SBR_9600;
+   209                        	.line	78
+   210 00:0048: E2 20        	sep	#$20
+   211                        	longa	off
+   212 00:004A: A9 1E        	lda	#$1e
+   213 00:004C: 8F 83 7F 00  	sta	>32643	; volatile
+   214                        ;    ACIA_CMD (ACIA) = ACIA_CMD_PMC_SPACE | ACIA_CMD_PME_DISABLE | ACIA_CMD_REM_NORMAL
+   215                        	.line	79
+   216                        ;                    | ACIA_CMD_TIC_DISABLE | ACIA_CMD_IRD_ENABLE | ACIA_CMD_DTR_ENABLE;
+   217 00:0050: A9 C9        	lda	#$c9
+   218 00:0052: 8F 82 7F 00  	sta	>32642	; volatile
+   219 00:0056: C2 20        	rep	#$20
+   220                        	longa	on
+   221                        ;
+   222                        ;    /* Clear the receive buffer */
+   223                        ;    ACIA_BUF (ACIA);
+   224                        	.line	83
+   225                        ;
+  Wed Apr 14 2021  0:19                                                                                                    Page 5
+
+
+   226                        ;    enableInterrupts ();
+   227                        	.line	85
+   228                        	asmstart
+   229 00:0058: 58           	cli
+   230                        	asmend
+   231                        	.line	85
+   232                        ;}
+   233                        	.line	86
+   234 00:0059: 6B           	rtl
+   235                        	.endblock	86
+   236             00000000   L2	equ	0
+   237             00000001   L3	equ	1
+   238                        	ends
+   239                        	efunc
+   240                        	.endfunc	86,1,0
+   241                        	.line	86
+   242                        ;
+   243                        ;/* Return the timer count */
+   244                        ;uint32_t millis (void)
+   245                        ;{
+   246                        	.line	89
+   247                        	.line	90
+   248                        	code
+   249                        	xdef	~~millis
+   250                        	func
+   251                        	.function	90
+   252                        ~~millis:
+   253                        	longa	on
+   254                        	longi	on
+   255 00:005A: 3B           	tsc
+   256 00:005B: 38           	sec
+   257 00:005C: E9 04 00     	sbc	#L6
+   258 00:005F: 1B           	tcs
+   259 00:0060: 0B           	phd
+   260 00:0061: 5B           	tcd
+   261                        	.block	90
+   262                        ;    uint32_t        now;
+   263                        ;
+   264                        ;    suspendInterrupts ();
+   265             00000000   now_1	set	0
+   266                        	.sym	now,0,18,1,32
+   267                        	.line	93
+   268                        	asmstart
+   269 00:0062: 08           	php
+   270 00:0063: 78           	sei
+   271                        	asmend
+   272                        	.line	93
+   273                        ;    now = ticks;
+   274                        	.line	94
+   275 00:0064: AD xx xx     	lda	|~~ticks	; volatile
+   276 00:0067: 85 01        	sta	<L7+now_1
+   277 00:0069: AD xx xx     	lda	|~~ticks+2	; volatile
+   278 00:006C: 85 03        	sta	<L7+now_1+2
+   279                        ;    restoreInterrupts ();
+   280                        	.line	95
+   281                        	asmstart
+   282 00:006E: 28           	plp
+   283                        	asmend
+  Wed Apr 14 2021  0:19                                                                                                    Page 6
+
+
+   284                        	.line	95
+   285                        ;
+   286                        ;    return (now);
+   287                        	.line	97
+   288 00:006F: A6 03        	ldx	<L7+now_1+2
+   289 00:0071: A5 01        	lda	<L7+now_1
+   290 00:0073: A8           	tay
+   291 00:0074: 2B           	pld
+   292 00:0075: 3B           	tsc
+   293 00:0076: 18           	clc
+   294 00:0077: 69 04 00     	adc	#L6
+   295 00:007A: 1B           	tcs
+   296 00:007B: 98           	tya
+   297 00:007C: 6B           	rtl
+   298                        ;}
+   299                        	.line	98
+   300                        	.endblock	98
+   301             00000004   L6	equ	4
+   302             00000001   L7	equ	1
+   303                        	ends
+   304                        	efunc
+   305                        	.endfunc	98,1,4
+   306                        	.line	98
+   307                        ;
+   308                        ;/* A timed delay */
+   309                        ;void delay (uint32_t msec)
+   310                        ;{
+   311                        	.line	101
+   312                        	.line	102
+   313                        	code
+   314                        	xdef	~~delay
+   315                        	func
+   316                        	.function	102
+   317                        ~~delay:
+   318                        	longa	on
+   319                        	longi	on
+   320 00:007D: 3B           	tsc
+   321 00:007E: 38           	sec
+   322 00:007F: E9 0C 00     	sbc	#L10
+   323 00:0082: 1B           	tcs
+   324 00:0083: 0B           	phd
+   325 00:0084: 5B           	tcd
+   326             00000004   msec_0	set	4
+   327                        	.block	102
+   328                        ;    uint32_t        start = millis ();
+   329                        ;
+   330                        ;    while ((millis () - start) < msec) /* Busy Wait */ ;
+   331             00000000   start_1	set	0
+   332                        	.sym	start,0,18,1,32
+   333                        	.sym	msec,4,18,6,32
+   334 00:0085: 22 xx xx xx  	jsl	~~millis
+   335 00:0089: 85 09        	sta	<L11+start_1
+   336 00:008B: 86 0B        	stx	<L11+start_1+2
+   337                        	.line	105
+   338                        L10001:
+   339 00:008D: 22 xx xx xx  	jsl	~~millis
+   340 00:0091: 85 01        	sta	<R0
+   341 00:0093: 86 03        	stx	<R0+2
+  Wed Apr 14 2021  0:19                                                                                                    Page 7
+
+
+   342 00:0095: 38           	sec
+   343 00:0096: A5 01        	lda	<R0
+   344 00:0098: E5 09        	sbc	<L11+start_1
+   345 00:009A: 85 05        	sta	<R1
+   346 00:009C: A5 03        	lda	<R0+2
+   347 00:009E: E5 0B        	sbc	<L11+start_1+2
+   348 00:00A0: 85 07        	sta	<R1+2
+   349 00:00A2: A5 05        	lda	<R1
+   350 00:00A4: C5 10        	cmp	<L10+msec_0
+   351 00:00A6: A5 07        	lda	<R1+2
+   352 00:00A8: E5 12        	sbc	<L10+msec_0+2
+   353 00:00AA: 90 E1        	bcc	L10001
+   354                        	.line	105
+   355                        ;}
+   356                        	.line	106
+   357 00:00AC: A5 0E        	lda	<L10+2
+   358 00:00AE: 85 12        	sta	<L10+2+4
+   359 00:00B0: A5 0D        	lda	<L10+1
+   360 00:00B2: 85 11        	sta	<L10+1+4
+   361 00:00B4: 2B           	pld
+   362 00:00B5: 3B           	tsc
+   363 00:00B6: 18           	clc
+   364 00:00B7: 69 10 00     	adc	#L10+4
+   365 00:00BA: 1B           	tcs
+   366 00:00BB: 6B           	rtl
+   367                        	.endblock	106
+   368             0000000C   L10	equ	12
+   369             00000009   L11	equ	9
+   370                        	ends
+   371                        	efunc
+   372                        	.endfunc	106,9,12
+   373                        	.line	106
+   374                        ;
+   375                        ;/* The Native IRQ handler. */
+   376                        ;void interrupt IRQHandler (void)
+   377                        ;{
+   378                        	.line	109
+   379                        	.line	110
+   380                        	code
+   381                        	xdef	~~IRQHandler
+   382                        	func
+   383                        	.function	110
+   384                        ~~IRQHandler:
+   385 00:00BC: 8B           	phb
+   386 00:00BD: C2 30        	rep	#$30
+   387                        	longa	on
+   388 00:00BF: 48           	pha
+   389 00:00C0: E2 20        	sep	#$20
+   390                        	longa	off
+   391                        	xref	_BEG_DATA
+   392 00:00C2: A9 xx        	lda	#^_BEG_DATA
+   393 00:00C4: 48           	pha
+   394 00:00C5: AB           	plb
+   395 00:00C6: C2 30        	rep	#$30
+   396                        	longa	on
+   397 00:00C8: DA           	phx
+   398 00:00C9: 5A           	phy
+   399                        	longa	on
+  Wed Apr 14 2021  0:19                                                                                                    Page 8
+
+
+   400                        	longi	on
+   401 00:00CA: 3B           	tsc
+   402 00:00CB: 38           	sec
+   403 00:00CC: E9 05 00     	sbc	#L15
+   404 00:00CF: 1B           	tcs
+   405 00:00D0: 0B           	phd
+   406 00:00D1: 5B           	tcd
+   407                        	.block	110
+   408                        ;    uint8_t         next;
+   409                        ;
+   410                        ;    /* Handle User VIA interrupts */
+   411                        ;    if (VIA_IFR (USR_VIA) & VIA_IFR_IRQ_MASK) {
+   412             00000000   next_1	set	0
+   413                        	.sym	next,0,14,1,8
+   414                        	.line	114
+   415 00:00D2: E2 20        	sep	#$20
+   416                        	longa	off
+   417 00:00D4: AF CD 7F 00  	lda	>32717	; volatile
+   418 00:00D8: 29 80        	and	#<$80
+   419 00:00DA: C2 20        	rep	#$20
+   420                        	longa	on
+   421 00:00DC: F0 1E        	beq	L10003
+   422                        	.line	114
+   423                        ;        /* Time to update the counter? */
+   424                        ;        if (VIA_IFR (USR_VIA) & VIA_IFR_T1_MASK) {
+   425                        	.line	116
+   426 00:00DE: E2 20        	sep	#$20
+   427                        	longa	off
+   428 00:00E0: AF CD 7F 00  	lda	>32717	; volatile
+   429 00:00E4: 29 40        	and	#<$40
+   430 00:00E6: C2 20        	rep	#$20
+   431                        	longa	on
+   432 00:00E8: F0 12        	beq	L10003
+   433                        	.line	116
+   434                        ;            next = VIA_T1CL (USR_VIA);
+   435                        	.line	117
+   436 00:00EA: E2 20        	sep	#$20
+   437                        	longa	off
+   438 00:00EC: AF C4 7F 00  	lda	>32708	; volatile
+   439 00:00F0: 85 05        	sta	<L16+next_1
+   440 00:00F2: C2 20        	rep	#$20
+   441                        	longa	on
+   442                        ;            ++ticks;
+   443                        	.line	118
+   444 00:00F4: EE xx xx     	inc	|~~ticks	; volatile
+   445 00:00F7: D0 03        	bne	L10003
+   446 00:00F9: EE xx xx     	inc	|~~ticks+2	; volatile
+   447                        ;        }
+   448                        	.line	119
+   449                        ;    }
+   450                        	.line	120
+   451                        ;
+   452                        ;    /* Handle System VIA interrupts */
+   453                        ;    if (VIA_IFR (SYS_VIA) & VIA_IFR_IRQ_MASK) {
+   454                        L10003:
+   455                        	.line	123
+   456 00:00FC: E2 20        	sep	#$20
+   457                        	longa	off
+  Wed Apr 14 2021  0:19                                                                                                    Page 9
+
+
+   458 00:00FE: AF ED 7F 00  	lda	>32749	; volatile
+   459 00:0102: 29 80        	and	#<$80
+   460 00:0104: C2 20        	rep	#$20
+   461                        	longa	on
+   462 00:0106: F0 3E        	beq	L10005
+   463                        	.line	123
+   464                        ;        /* Time to send another character? */
+   465                        ;        if (VIA_IFR (SYS_VIA) & VIA_IFR_T2_MASK) {
+   466                        	.line	125
+   467 00:0108: E2 20        	sep	#$20
+   468                        	longa	off
+   469 00:010A: AF ED 7F 00  	lda	>32749	; volatile
+   470 00:010E: 29 20        	and	#<$20
+   471 00:0110: C2 20        	rep	#$20
+   472                        	longa	on
+   473 00:0112: F0 32        	beq	L10005
+   474                        	.line	125
+   475                        ;            if (tx.head != tx.tail) {
+   476                        	.line	126
+   477 00:0114: E2 20        	sep	#$20
+   478                        	longa	off
+   479 00:0116: AD xx xx     	lda	|~~tx	; volatile
+   480 00:0119: CD xx xx     	cmp	|~~tx+1	; volatile
+   481 00:011C: C2 20        	rep	#$20
+   482                        	longa	on
+   483 00:011E: F0 1F        	beq	L10007
+   484                        	.line	126
+   485                        ;                ACIA_BUF (ACIA) = tx.data [tx.head];
+   486                        	.line	127
+   487 00:0120: E2 20        	sep	#$20
+   488                        	longa	off
+   489 00:0122: AD xx xx     	lda	|~~tx	; volatile
+   490 00:0125: C2 20        	rep	#$20
+   491                        	longa	on
+   492 00:0127: 29 FF 00     	and	#$ff
+   493 00:012A: AA           	tax
+   494 00:012B: E2 20        	sep	#$20
+   495                        	longa	off
+   496 00:012D: BD xx xx     	lda	|~~tx+2,X
+   497 00:0130: 8F 80 7F 00  	sta	>32640	; volatile
+   498                        ;                tx.head = (tx.head + 1) % sizeof (tx.data);
+   499                        	.line	128
+   500 00:0134: AD xx xx     	lda	|~~tx	; volatile
+   501 00:0137: 1A           	ina
+   502 00:0138: 29 3F        	and	#<$3f
+   503 00:013A: 8D xx xx     	sta	|~~tx	; volatile
+   504 00:013D: C2 20        	rep	#$20
+   505                        	longa	on
+   506                        ;            }
+   507                        	.line	129
+   508                        ;            VIA_T2C (SYS_VIA) = BAUD_COUNT;
+   509                        L10007:
+   510                        	.line	130
+   511 00:013F: A9 B7 3E     	lda	#$3eb7
+   512 00:0142: 8F E8 7F 00  	sta	>32744
+   513                        ;        }
+   514                        	.line	131
+   515                        ;    }
+  Wed Apr 14 2021  0:19                                                                                                    Page 10
+
+
+   516                        	.line	132
+   517                        ;
+   518                        ;    /* Handle ACIA receive interrupts */
+   519                        ;    if (ACIA_SR (ACIA) & ACIA_SR_IRQ_MASK) {
+   520                        L10005:
+   521                        	.line	135
+   522 00:0146: E2 20        	sep	#$20
+   523                        	longa	off
+   524 00:0148: AF 81 7F 00  	lda	>32641	; volatile
+   525 00:014C: 29 80        	and	#<$80
+   526 00:014E: C2 20        	rep	#$20
+   527                        	longa	on
+   528 00:0150: F0 38        	beq	L27
+   529                        	.line	135
+   530                        ;        /* Has a character been recieved? */
+   531                        ;        if (ACIA_SR (ACIA) & ACIA_SR_RDRF_MASK) {
+   532                        	.line	137
+   533 00:0152: E2 20        	sep	#$20
+   534                        	longa	off
+   535 00:0154: AF 81 7F 00  	lda	>32641	; volatile
+   536 00:0158: 29 08        	and	#<$8
+   537 00:015A: C2 20        	rep	#$20
+   538                        	longa	on
+   539 00:015C: F0 2C        	beq	L27
+   540                        	.line	137
+   541                        ;            rx.data [rx.tail] = ACIA_BUF (ACIA);
+   542                        	.line	138
+   543 00:015E: E2 20        	sep	#$20
+   544                        	longa	off
+   545 00:0160: AD xx xx     	lda	|~~rx+1	; volatile
+   546 00:0163: C2 20        	rep	#$20
+   547                        	longa	on
+   548 00:0165: 29 FF 00     	and	#$ff
+   549 00:0168: AA           	tax
+   550 00:0169: E2 20        	sep	#$20
+   551                        	longa	off
+   552 00:016B: AF 80 7F 00  	lda	>32640	; volatile
+   553 00:016F: 9D xx xx     	sta	|~~rx+2,X
+   554                        ;            next = (rx.tail + 1) % sizeof (rx.data);
+   555                        	.line	139
+   556 00:0172: AD xx xx     	lda	|~~rx+1	; volatile
+   557 00:0175: 1A           	ina
+   558 00:0176: 29 3F        	and	#<$3f
+   559 00:0178: 85 05        	sta	<L16+next_1
+   560                        ;            if (next != rx.head) rx.tail = next;
+   561                        	.line	140
+   562 00:017A: CD xx xx     	cmp	|~~rx	; volatile
+   563 00:017D: C2 20        	rep	#$20
+   564                        	longa	on
+   565 00:017F: F0 09        	beq	L27
+   566                        	.line	140
+   567 00:0181: E2 20        	sep	#$20
+   568                        	longa	off
+   569 00:0183: A5 05        	lda	<L16+next_1
+   570 00:0185: 8D xx xx     	sta	|~~rx+1	; volatile
+   571 00:0188: C2 20        	rep	#$20
+   572                        	longa	on
+   573                        ;        }
+  Wed Apr 14 2021  0:19                                                                                                    Page 11
+
+
+   574                        	.line	141
+   575                        ;    }
+   576                        	.line	142
+   577                        ;}
+   578                        	.line	143
+   579                        L27:
+   580 00:018A: 2B           	pld
+   581 00:018B: 3B           	tsc
+   582 00:018C: 18           	clc
+   583 00:018D: 69 05 00     	adc	#L15
+   584 00:0190: 1B           	tcs
+   585 00:0191: 7A           	ply
+   586 00:0192: FA           	plx
+   587 00:0193: 68           	pla
+   588 00:0194: AB           	plb
+   589 00:0195: 40           	rti
+   590                        	.endblock	143
+   591             00000005   L15	equ	5
+   592             00000005   L16	equ	5
+   593                        	ends
+   594                        	efunc
+   595                        	.endfunc	143,5,5
+   596                        	.line	143
+   597                        ;
+   598                        ;/* Put a character in the ACIA transmit FIFO. Wait for a space if necessary */
+   599                        ;int16_t aciaTx (uint8_t ch)
+   600                        ;{
+   601                        	.line	146
+   602                        	.line	147
+   603                        	code
+   604                        	xdef	~~aciaTx
+   605                        	func
+   606                        	.function	147
+   607                        ~~aciaTx:
+   608                        	longa	on
+   609                        	longi	on
+   610 00:0196: 3B           	tsc
+   611 00:0197: 38           	sec
+   612 00:0198: E9 05 00     	sbc	#L28
+   613 00:019B: 1B           	tcs
+   614 00:019C: 0B           	phd
+   615 00:019D: 5B           	tcd
+   616             00000004   ch_0	set	4
+   617                        	.block	147
+   618                        ;    uint8_t         next;
+   619                        ;
+   620                        ;    tx.data [tx.tail] = ch;
+   621             00000000   next_1	set	0
+   622                        	.sym	next,0,14,1,8
+   623                        	.sym	ch,4,14,6,8
+   624                        	.line	150
+   625 00:019E: E2 20        	sep	#$20
+   626                        	longa	off
+   627 00:01A0: AD xx xx     	lda	|~~tx+1	; volatile
+   628 00:01A3: C2 20        	rep	#$20
+   629                        	longa	on
+   630 00:01A5: 29 FF 00     	and	#$ff
+   631 00:01A8: AA           	tax
+  Wed Apr 14 2021  0:19                                                                                                    Page 12
+
+
+   632 00:01A9: E2 20        	sep	#$20
+   633                        	longa	off
+   634 00:01AB: A5 09        	lda	<L28+ch_0
+   635 00:01AD: 9D xx xx     	sta	|~~tx+2,X
+   636                        ;    next = (tx.tail + 1) % sizeof (tx.data);
+   637                        	.line	151
+   638 00:01B0: AD xx xx     	lda	|~~tx+1	; volatile
+   639 00:01B3: 1A           	ina
+   640 00:01B4: 29 3F        	and	#<$3f
+   641 00:01B6: 85 05        	sta	<L29+next_1
+   642 00:01B8: C2 20        	rep	#$20
+   643                        	longa	on
+   644                        ;
+   645                        ;    while (next == tx.head) /* FIFO is full */ ;
+   646                        	.line	153
+   647                        L10011:
+   648 00:01BA: E2 20        	sep	#$20
+   649                        	longa	off
+   650 00:01BC: A5 05        	lda	<L29+next_1
+   651 00:01BE: CD xx xx     	cmp	|~~tx	; volatile
+   652 00:01C1: C2 20        	rep	#$20
+   653                        	longa	on
+   654 00:01C3: F0 F5        	beq	L10011
+   655                        	.line	153
+   656                        ;
+   657                        ;    tx.tail = next;
+   658                        	.line	155
+   659 00:01C5: E2 20        	sep	#$20
+   660                        	longa	off
+   661 00:01C7: A5 05        	lda	<L29+next_1
+   662 00:01C9: 8D xx xx     	sta	|~~tx+1	; volatile
+   663 00:01CC: C2 20        	rep	#$20
+   664                        	longa	on
+   665                        ;    return (0);
+   666                        	.line	156
+   667 00:01CE: A9 00 00     	lda	#$0
+   668 00:01D1: A8           	tay
+   669 00:01D2: A5 07        	lda	<L28+2
+   670 00:01D4: 85 09        	sta	<L28+2+2
+   671 00:01D6: A5 06        	lda	<L28+1
+   672 00:01D8: 85 08        	sta	<L28+1+2
+   673 00:01DA: 2B           	pld
+   674 00:01DB: 3B           	tsc
+   675 00:01DC: 18           	clc
+   676 00:01DD: 69 07 00     	adc	#L28+2
+   677 00:01E0: 1B           	tcs
+   678 00:01E1: 98           	tya
+   679 00:01E2: 6B           	rtl
+   680                        ;}
+   681                        	.line	157
+   682                        	.endblock	157
+   683             00000005   L28	equ	5
+   684             00000005   L29	equ	5
+   685                        	ends
+   686                        	efunc
+   687                        	.endfunc	157,5,5
+   688                        	.line	157
+   689                        ;
+  Wed Apr 14 2021  0:19                                                                                                    Page 13
+
+
+   690                        ;/* Reads the next character from the input fifo */
+   691                        ;int16_t aciaRx (int16_t wait)
+   692                        ;{
+   693                        	.line	160
+   694                        	.line	161
+   695                        	code
+   696                        	xdef	~~aciaRx
+   697                        	func
+   698                        	.function	161
+   699                        ~~aciaRx:
+   700                        	longa	on
+   701                        	longi	on
+   702 00:01E3: 3B           	tsc
+   703 00:01E4: 38           	sec
+   704 00:01E5: E9 05 00     	sbc	#L33
+   705 00:01E8: 1B           	tcs
+   706 00:01E9: 0B           	phd
+   707 00:01EA: 5B           	tcd
+   708             00000004   wait_0	set	4
+   709                        	.block	161
+   710                        ;    uint8_t         ch;
+   711                        ;
+   712                        ;    while (rx.head == rx.tail)
+   713             00000000   ch_1	set	0
+   714                        	.sym	ch,0,14,1,8
+   715                        	.sym	wait,4,5,6,16
+   716                        	.line	164
+   717                        L10015:
+   718 00:01EB: E2 20        	sep	#$20
+   719                        	longa	off
+   720 00:01ED: AD xx xx     	lda	|~~rx	; volatile
+   721 00:01F0: CD xx xx     	cmp	|~~rx+1	; volatile
+   722 00:01F3: C2 20        	rep	#$20
+   723                        	longa	on
+   724 00:01F5: F0 24        	beq	L20000
+   725                        	.line	167
+   726 00:01F7: E2 20        	sep	#$20
+   727                        	longa	off
+   728 00:01F9: AD xx xx     	lda	|~~rx	; volatile
+   729 00:01FC: C2 20        	rep	#$20
+   730                        	longa	on
+   731 00:01FE: 29 FF 00     	and	#$ff
+   732 00:0201: AA           	tax
+   733 00:0202: E2 20        	sep	#$20
+   734                        	longa	off
+   735 00:0204: BD xx xx     	lda	|~~rx+2,X
+   736 00:0207: 85 05        	sta	<L34+ch_1
+   737                        ;    rx.head = (rx.head + 1) % sizeof (rx.data);
+   738                        	.line	168
+   739 00:0209: AD xx xx     	lda	|~~rx	; volatile
+   740 00:020C: 1A           	ina
+   741 00:020D: 29 3F        	and	#<$3f
+   742 00:020F: 8D xx xx     	sta	|~~rx	; volatile
+   743 00:0212: C2 20        	rep	#$20
+   744                        	longa	on
+   745                        ;    return (ch);
+   746                        	.line	169
+   747 00:0214: A5 05        	lda	<L34+ch_1
+  Wed Apr 14 2021  0:19                                                                                                    Page 14
+
+
+   748 00:0216: 29 FF 00     	and	#$ff
+   749 00:0219: 80 07        	bra	L38
+   750                        L20000:
+   751                        ;        if (!wait) return (-1);
+   752                        	.line	165
+   753 00:021B: A5 09        	lda	<L33+wait_0
+   754 00:021D: D0 CC        	bne	L10015
+   755                        	.line	165
+   756 00:021F: A9 FF FF     	lda	#$ffff
+   757                        L38:
+   758 00:0222: A8           	tay
+   759 00:0223: A5 07        	lda	<L33+2
+   760 00:0225: 85 09        	sta	<L33+2+2
+   761 00:0227: A5 06        	lda	<L33+1
+   762 00:0229: 85 08        	sta	<L33+1+2
+   763 00:022B: 2B           	pld
+   764 00:022C: 3B           	tsc
+   765 00:022D: 18           	clc
+   766 00:022E: 69 07 00     	adc	#L33+2
+   767 00:0231: 1B           	tcs
+   768 00:0232: 98           	tya
+   769 00:0233: 6B           	rtl
+   770                        ;
+   771                        ;    ch = rx.data [rx.head];
+   772                        ;}
+   773                        	.line	170
+   774                        	.endblock	170
+   775             00000005   L33	equ	5
+   776             00000005   L34	equ	5
+   777                        	ends
+   778                        	efunc
+   779                        	.endfunc	170,5,5
+   780                        	.line	170
+   781                        ;
+   782                        	.line	170
+   783                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.c",160
+   784                        	udata
+   785                        ~~ticks
+   786 00:0000:              	ds	4
+   787 00:0004:              	ends
+   788                        	udata
+   789                        ~~tx
+   790 00:0004:              	ds	66
+   791 00:0046:              	ends
+   792                        	udata
+   793                        ~~rx
+   794 00:0046:              	ds	66
+   795 00:0088:              	ends
+   796                        	.sym	~~ticks,~~ticks,18,3,32
+   797                        	.sym	~~tx,~~tx,10,3,528,6
+   798                        	.sym	~~rx,~~rx,10,3,528,6
+   799                        	.sym	fifo_t,0,10,14,528,6
+   800                        	.sym	FILE,0,10,14,160,5
+   801                        	.sym	fpos_t,0,7,14,32
+   802                        	.sym	size_t,0,16,14,16
+   803                        	.sym	va_list,0,142,14,32
+   804                        	.sym	~~aciaRx,~~aciaRx,69,2,0
+   805                        	.sym	~~aciaTx,~~aciaTx,69,2,0
+  Wed Apr 14 2021  0:19                                                                                                    Page 15
+
+
+   806                        	.sym	~~delay,~~delay,65,2,0
+   807                        	.sym	~~millis,~~millis,82,2,0
+   808                        	.sym	~~initialise,~~initialise,65,2,0
+   809                        	.sym	~~IRQHandler,~~IRQHandler,65,2,0
+   810                        	.sym	acia_t,0,10,14,32,4
+   811                        	.sym	pia_t,0,10,14,32,3
+   812                        	.sym	via_t,0,10,14,128,2
+   813                        	.sym	imaxdiv_t,0,10,14,64,1
+   814                        	.sym	uintmax_t,0,18,14,32
+   815                        	.sym	intmax_t,0,7,14,32
+   816                        	.sym	uintptr_t,0,16,14,16
+   817                        	.sym	intptr_t,0,5,14,16
+   818                        	.sym	uint32_t,0,18,14,32
+   819                        	.sym	int32_t,0,7,14,32
+   820                        	.sym	uint16_t,0,16,14,16
+   821                        	.sym	int16_t,0,5,14,16
+   822                        	.sym	uint8_t,0,14,14,8
+   823                        	.sym	int8_t,0,2,14,8
+   824                        	.sym	wchar_t,0,14,14,8
+
+
+      Lines assembled: 824
+      Errors: 0

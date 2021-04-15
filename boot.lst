@@ -1,0 +1,181 @@
+  Wed Apr 14 2021  0:18                                                                                                    Page 1
+
+
+                                               ***************************************
+                                               **      WDC 65C816 Macro Assembler   **
+                                               **                                   **
+                                               **     Version 3.49.1- Feb  6 2006    **
+                                               ***************************************
+
+     1                        ;===============================================================================
+     2                        ; __        ____  ____   ____ ___  _  __  ______  ______  
+     3                        ; \ \      / / /_| ___| / ___( _ )/ |/ /_/ ___\ \/ / __ ) 
+     4                        ;  \ \ /\ / / '_ \___ \| |   / _ \| | '_ \___ \\  /|  _ \ 
+     5                        ;   \ V  V /| (_) |__) | |__| (_) | | (_) |__) /  \| |_) |
+     6                        ;  __\_/\_/  \___/____/ \____\___/|_|\___/____/_/\_\____/ 
+     7                        ; | __ )  ___   ___ | |_   / ___|___   __| | ___          
+     8                        ; |  _ \ / _ \ / _ \| __| | |   / _ \ / _` |/ _ \         
+     9                        ; | |_) | (_) | (_) | |_  | |__| (_) | (_| |  __/         
+    10                        ; |____/ \___/ \___/ \__|  \____\___/ \__,_|\___|         
+    11                        ;
+    12                        ; W65C816SXB C Runtime Startup Module (Small Model)
+    13                        ;-------------------------------------------------------------------------------
+    14                        ; Copyright (C)2019 Andrew Jacobs.
+    15                        ; All rights reserved.
+    16                        ;
+    17                        ; This work is made available under the terms of the Creative Commons
+    18                        ; Attribution-NonCommercial-ShareAlike 4.0 International license. Open the
+    19                        ; following URL to see the details.
+    20                        ;
+    21                        ; http://creativecommons.org/licenses/by-nc-sa/4.0/
+    22                        ;
+    23                        ;===============================================================================
+    24                        ; Notes
+    25                        ;
+    26                        ; This code is based on the sample code in the Assembler/Linker manual and the
+    27                        ; examples provided by WDC for the W65C816SXB board.
+    28                        ;-------------------------------------------------------------------------------
+    29                        
+    30                        		chip	65816
+    31                        
+    32                        		include "w65c816.inc"
+    33                        		
+    34                        ;===============================================================================
+    35                        ; Stack Area
+    36                        ;-------------------------------------------------------------------------------
+    37                        
+    38                        STACK		section
+    39                        
+    40 00:0000:              		ds	512		; Reserve 512 bytes for the stack
+    41                        		
+    42 00:0200:              		ends
+    43                        		
+    44                        ;===============================================================================
+    45                        ; Reset Handler
+    46                        ;-------------------------------------------------------------------------------
+    47                        
+    48                        ;		code
+    49                        		
+    50                        IRQ_CODE	section offset $2000
+    51                        		xref	~~main
+    52                        		xref	_BEG_DATA
+  Wed Apr 14 2021  0:18                                                                                                    Page 2
+
+
+    53                        		xref	_END_DATA
+    54                        		xref	_ROM_BEG_DATA
+    55                        		xref	_BEG_UDATA
+    56                        		xref	_END_UDATA
+    57                        		xref	_BEG_STACK
+    58                        		xref	_END_STACK
+    59                        		xref	~~TILE_MAP_0
+    60                        		
+    61                        		longa	off
+    62                        		longi	off
+    63                        		
+    64                        
+    65                        IRQ_CODE
+    66                        RESET: 
+    67 00:2000: 78           		sei				; Reset flags
+    68 00:2001: D8           		cld
+    69                        		native				; Go native
++   69 00:2002: 18           		clc
++   69 00:2003: FB           		xce
+    70                        
+    71                        		long_ai				; Set stack
++   71 00:2004: C2 30        		rep	#M_FLAG|X_FLAG
++   71                        		longa	on
++   71                        		longi	on
+    72 00:2006: A2 xx xx     		ldx	#_END_STACK-1
+    73 00:2009: 9A           		txs
+    74                        
+    75 00:200A: A9 xx xx     		lda	#_END_DATA-_BEG_DATA	; Any initialised data?
+    76 00:200D: F0 0A        		beq	NoConstData
+    77 00:200F: 3A           		dec	a			; Yes, copy into RAM
+    78 00:2010: A2 xx xx     		ldx	#_ROM_BEG_DATA
+    79 00:2013: A0 xx xx     		ldy	#_BEG_DATA
+    80 00:2016: 54 xx xx     		mvn	^_ROM_BEG_DATA,^_BEG_DATA
+    81                        NoConstData:
+    82                        
+    83                        		short_a
++   83 00:2019: E2 20        		sep	#M_FLAG
++   83                        		longa	off
+    84 00:201B: A9 xx        		lda	#^_BEG_DATA		; Ensure data bank selected
+    85 00:201D: 48           		pha
+    86 00:201E: AB           		plb
+    87                        
+    88 00:201F: A2 xx xx     		ldx	#_END_UDATA-_BEG_UDATA	; Any uninitialise data?
+    89 00:2022: F0 06        		beq	NoData
+    90 00:2024: CA           ClearData:	dex				; Yes, clear it
+    91 00:2025: 9E xx xx     		stz	!_BEG_UDATA,x
+    92 00:2028: D0 FA        		bne	ClearData
+    93                        NoData:
+    94                        
+    95                        		long_a				; Start the main application
++   95 00:202A: C2 20        		rep	#M_FLAG
++   95                        		longa	on
+    96 00:202C: F4 00 00     		pea	0
+    97 00:202F: F4 00 00     		pea	0
+    98 00:2032: F4 00 00     		pea	0
+    99 00:2035: 5C xx xx xx  		jmp	>~~main ; long jump
+   100                        		
+   101                        ;===============================================================================
+  Wed Apr 14 2021  0:18                                                                                                    Page 3
+
+
+   102                        ; Vectors
+   103                        ;-------------------------------------------------------------------------------
+   104                        		
+   105                        BadVector:
+   106 00:2039: DB           		stp
+   107 00:203A: 80 FD        		bra	BadVector
+   108                        		
+   109                        		xref	~~IRQHandler
+   110                        		
+   111                        SHADOW		section offset $7ee0
+   112                        
+   113 00:7EE0: 00 00        		dw	0		; Native Mode Vectors
+   114 00:7EE2: 00 00        		dw	0
+   115 00:7EE4: 39 20        		dw	BadVector	; COP
+   116 00:7EE6: 39 20        		dw	BadVector	; BRK
+   117 00:7EE8: 39 20        		dw	BadVector	; ABORT
+   118 00:7EEA: 39 20        		dw	BadVector	; NMI
+   119 00:7EEC: 00 00        		dw	0
+   120 00:7EEE: xx xx        		dw	~~IRQHandler	; IRQ
+   121                        
+   122 00:7EF0: 00 00        		dw	0		; Emulation Mode Vectors
+   123 00:7EF2: 00 00        		dw	0
+   124 00:7EF4: 39 20        		dw	BadVector	; COP
+   125 00:7EF6: 00 00        		dw	0
+   126 00:7EF8: 39 20        		dw	BadVector	; ABORT
+   127 00:7EFA: 39 20        		dw	BadVector	; NMI
+   128 00:7EFC: 00 20        		dw	RESET		; RESET
+   129 00:7EFE: 39 20        		dw	BadVector	; IRQBRK
+   130                        		
+   131 00:7F00:              		ends
+   132                        	
+   133                        VECTORS		section	offset $ffe0
+   134                        
+   135 00:FFE0: 00 00        		dw	0		; Native Mode Vectors
+   136 00:FFE2: 00 00        		dw	0
+   137 00:FFE4: 39 20        		dw	BadVector	; COP
+   138 00:FFE6: 39 20        		dw	BadVector	; BRK
+   139 00:FFE8: 39 20        		dw	BadVector	; ABORT
+   140 00:FFEA: 39 20        		dw	BadVector	; NMI
+   141 00:FFEC: 00 00        		dw	0
+   142 00:FFEE: xx xx        		dw	~~IRQHandler	; IRQ
+   143                        
+   144 00:FFF0: 00 00        		dw	0		; Emulation Mode Vectors
+   145 00:FFF2: 00 00        		dw	0
+   146 00:FFF4: 39 20        		dw	BadVector	; COP
+   147 00:FFF6: 00 00        		dw	0
+   148 00:FFF8: 39 20        		dw	BadVector	; ABORT
+   149 00:FFFA: 39 20        		dw	BadVector	; NMI
+   150 00:FFFC: 00 20        		dw	RESET		; RESET
+   151 00:FFFE: 39 20        		dw	BadVector	; IRQBRK
+   152                        
+   153                        		end
+
+
+      Lines assembled: 266
+      Errors: 0

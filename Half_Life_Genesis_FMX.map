@@ -1,0 +1,120 @@
+Section CODE:
+	00010000 _BEG_CODE
+	00010000 ~~main
+	00010752 ~~initialise
+	000107ac ~~millis
+	000107cf ~~delay
+	0001080e ~~IRQHandler
+	000108e8 ~~aciaTx
+	00010935 ~~aciaRx
+	00010986 ~~isatty
+	000109a3 ~~read
+	000109da ~~write
+	00010a0b ~~lseek
+	00010a28 ~~close
+	00010a45 ~~unlink
+	00010a62 ~~VKYII_Load_Palette
+	00010bc5 ~~VKYII_Load_Tille_Map
+	00010c29 ~~Copy
+	00010c68 ~~Set
+	00010ca0 ~~Clear
+	00010cd8 ~~Print_HEX_8
+	00010d4e ~~Print_HEX_16
+	00010e03 ~~Print_UINT_8
+	00010ecf ~~Print_UINT_16
+	00010ff7 ~~Print_INT_8
+	00011173 ~~Print_INT_16
+	000112d1 ~~~asr
+	000112e2 ~~~div
+	00011306 ~~~fmov
+	00011327 ~~~fnmov
+	00011347 ~~~fsw
+	00011371 ~~~lasl
+	000113a0 ~~~lsr
+	000113a8 ~~~mod
+	000113cc ~~~mul
+	0001140d ~~~nfmov
+	0001142d ~~~udv
+	00011461 ~~~umd
+	00011467 _END_CODE
+
+Section DATA:
+	00043000 _BEG_DATA
+	00043000 ~~text
+	0004300e ~~points
+	0004307a ~~point_2
+	00043092 ~~point_3
+	0004309e ~~point_4
+	000430aa ~~point_dest
+	000430b6 ~~cube
+	000430e6 ~~cube_p
+	00043116 ~~line
+	0004315e ~~result_projection
+	0004316a ~~mv
+	00043170 ~~mv_3d
+	00043176 ~~palette
+	00043576 ~~TRIGO_SIN
+	00043776 ~~TRIGO_COS
+	00043976 ~~TROGO_TAN
+	00043b76 ~~HEX_to_STR
+	00043b97 _END_DATA
+
+Section UDATA:
+	00043b97 _BEG_UDATA
+	00043bb5 ~~ticks
+	00043bb9 ~~tx
+	00043bfb ~~rx
+	00043c3d ~~heap_end
+	00043c3e ~~heap_start
+	00045c3e _END_UDATA
+
+Section stack:
+	00045c3e _BEG_STACK
+	00045e3e _END_STACK
+
+Section irq_code:
+	00002000 _BEG_IRQ_CODE
+	0000203c _END_IRQ_CODE
+
+Section shadow:
+	00007ee0 _BEG_SHADOW
+	00007f00 _END_SHADOW
+
+Section vectors:
+	0000ffe0 _BEG_VECTORS
+	00010000 _END_VECTORS
+
+Section tilemap:
+	00090000 _BEG_TILEMAP
+	0009e400 _END_TILEMAP
+
+Section pnj:
+	000a0000 _BEG_PNJ
+	000ac400 _END_PNJ
+
+Section bank3:
+	00031000 _BEG_BANK3
+	00031ea4 _END_BANK3
+
+ABSOLUTES:
+	00090000 ~~TILE_MAP_0
+	00091000 ~~TILE_MAP_1
+	00092000 ~~TILE_MAP_2
+	00093000 ~~TILE_MAP_PIXEL
+	0009e000 ~~TILE_MAP_PALETTE
+	000a0000 ~~PNJ_CONTRACT_SPIRT_PIXEL
+	000ac000 ~~PNJ_CONTRACT_SPIRT_PALETTE
+	00031000 ~~Clear_TEXT
+	00031037 ~~test_func_fall
+	00031079 ~~Get_VICKY_II_Version
+	000310ee ~~load_palette
+	0003115f ~~Clear_VRAM_B0_BA
+	000311fc ~~Drow_line
+	00031a9b ~~Drow_point
+	00031b17 ~~Rot_X
+	00031be8 ~~Rot_Y
+	00031cb9 ~~Rot_Z
+	00031dc5 ~~Projection
+	00031e27 ~~Move
+	00031e77 ~~Print_string
+

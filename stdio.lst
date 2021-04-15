@@ -1,0 +1,528 @@
+  Wed Apr 14 2021  0:19                                                                                                    Page 1
+
+
+                                               ***************************************
+                                               **      WDC 65C816 Macro Assembler   **
+                                               **                                   **
+                                               **     Version 3.49.1- Feb  6 2006    **
+                                               ***************************************
+
+     1                        ;:ts=8
+     2             00000001   R0	equ	1
+     3             00000005   R1	equ	5
+     4             00000009   R2	equ	9
+     5             0000000D   R3	equ	13
+     6                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\stdio.c",0
+     7                        ;/*============================================================================*
+     8                        ; * __        ____  ____   ____ ___  _  __  ______  ______                     *
+     9                        ; * \ \      / / /_| ___| / ___( _ )/ |/ /_/ ___\ \/ / __ )                    *
+    10                        ; *  \ \ /\ / / '_ \___ \| |   / _ \| | '_ \___ \\  /|  _ \                    *
+    11                        ; *   \ V  V /| (_) |__) | |__| (_) | | (_) |__) /  \| |_) |                   *
+    12                        ; *  __\_/\_/  \___/____/ \____\___/|_|\___/____/_/\_\____/                    *
+    13                        ; * / ___|(_)_ __ ___  _ __ | | ___   ___| |_ __| (_) ___                      *
+    14                        ; * \___ \| | '_ ` _ \| '_ \| |/ _ \ / __| __/ _` | |/ _ \                     *
+    15                        ; *  ___) | | | | | | | |_) | |  __/ \__ \ || (_| | | (_) |                    *
+    16                        ; * |____/|_|_| |_| |_| .__/|_|\___| |___/\__\__,_|_|\___/                     *
+    17                        ; *                   |_|                                                      *
+    18                        ; *                                                                            *
+    19                        ; * A Simple STDIO Implementtation for the W65C816SXB Developer Board          *
+    20                        ; *----------------------------------------------------------------------------*
+    21                        ; * Copyright (C),2019 Andrew Jacobs                                           *
+    22                        ; * All rights reserved.                                                       *
+    23                        ; *                                                                            *
+    24                        ; * This work is made available under the terms of the Creative Commons        *
+    25                        ; * Attribution-NonCommercial-ShareAlike 4.0 International license. Open the   *
+    26                        ; * following URL to see the details.                                          *
+    27                        ; *                                                                            *
+    28                        ; * http://creativecommons.org/licenses/by-nc-sa/4.0/                          *
+    29                        ; *                                                                            *
+    30                        ; *============================================================================*
+    31                        ; * Notes:                                                                     *
+    32                        ; *                                                                            *
+    33                        ; *----------------------------------------------------------------------------*/
+    34                        ;
+    35                        ;#include "FMX.h"
+    36                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",0
+    37                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c816.h",0
+    38                        	.line	33
+    39                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",27
+    40                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c22.h",0
+    41                        	.file	"C:\WDC\Tools\INCLUDE\inttypes.h",0
+    42                        	.stag	fake1_,64,1
+    43                        	.member	quot,0,7,8,32
+    44                        	.member	rem,32,7,8,32
+    45                        	.eos
+    46                        	.line	111
+    47                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c22.h",27
+    48                        	.stag	fake2_,128,2
+    49                        	.member	orb,0,14,8,8
+    50                        	.member	ora,8,14,8,8
+    51                        	.member	ddrb,16,14,8,8
+    52                        	.member	ddra,24,14,8,8
+  Wed Apr 14 2021  0:19                                                                                                    Page 2
+
+
+    53                        	.member	t1cl,32,14,8,8
+    54                        	.member	t1ch,40,14,8,8
+    55                        	.member	t1ll,48,14,8,8
+    56                        	.member	t1lh,56,14,8,8
+    57                        	.member	t2cl,64,14,8,8
+    58                        	.member	t2ch,72,14,8,8
+    59                        	.member	sr,80,14,8,8
+    60                        	.member	acr,88,14,8,8
+    61                        	.member	pcr,96,14,8,8
+    62                        	.member	ifr,104,14,8,8
+    63                        	.member	ier,112,14,8,8
+    64                        	.member	oran,120,14,8,8
+    65                        	.eos
+    66                        	.line	142
+    67                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",28
+    68                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c21.h",0
+    69                        	.file	"C:\WDC\Tools\INCLUDE\inttypes.h",0
+    70                        	.line	111
+    71                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c21.h",27
+    72                        	.stag	fake3_,32,3
+    73                        	.member	pia,0,14,8,8
+    74                        	.member	cra,8,14,8,8
+    75                        	.member	pib,16,14,8,8
+    76                        	.member	crb,24,14,8,8
+    77                        	.eos
+    78                        	.line	81
+    79                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",29
+    80                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c51.h",0
+    81                        	.file	"C:\WDC\Tools\INCLUDE\inttypes.h",0
+    82                        	.line	111
+    83                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c51.h",29
+    84                        	.stag	fake4_,32,4
+    85                        	.member	buf,0,14,8,8
+    86                        	.member	sr,8,14,8,8
+    87                        	.member	cmd,16,14,8,8
+    88                        	.member	ctl,24,14,8,8
+    89                        	.eos
+    90                        	.line	117
+    91                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",30
+    92                        	.line	52
+    93                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\stdio.c",29
+    94                        ;
+    95                        ;#include <stdio.h>
+    96                        	.file	"C:\WDC\Tools\INCLUDE\stdio.h",0
+    97                        	.file	"C:\WDC\Tools\INCLUDE\stdarg.h",0
+    98                        	.line	51
+    99                        	.file	"C:\WDC\Tools\INCLUDE\stdio.h",40
+   100                        	.stag	__stdio,160,5
+   101                        	.member	_bp,0,142,8,32
+   102                        	.member	_bend,32,142,8,32
+   103                        	.member	_buff,64,142,8,32
+   104                        	.member	_flags,96,15,8,16
+   105                        	.member	_unit,112,14,8,8
+   106                        	.member	_bytbuf,120,14,8,8
+   107                        	.member	_buflen,128,16,8,16
+   108                        	.member	_tmpnum,144,15,8,16
+   109                        	.eos
+   110                        	.line	219
+  Wed Apr 14 2021  0:19                                                                                                    Page 3
+
+
+   111                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\stdio.c",31
+   112                        ;
+   113                        ;/* Define an 8K area to be used for the C heap */
+   114                        ;char heap_start [8 * 1024];
+   115                        ;char heap_end [1];
+   116                        ;
+   117                        ;/* Assume all file are TTY devices */
+   118                        ;int isatty (int fd)
+   119                        ;{
+   120                        	.line	38
+   121                        	.line	39
+   122                        	code
+   123                        	xdef	~~isatty
+   124                        	func
+   125                        	.function	39
+   126                        ~~isatty:
+   127                        	longa	on
+   128                        	longi	on
+   129 00:0000: 3B           	tsc
+   130 00:0001: 38           	sec
+   131 00:0002: E9 00 00     	sbc	#L2
+   132 00:0005: 1B           	tcs
+   133 00:0006: 0B           	phd
+   134 00:0007: 5B           	tcd
+   135             00000004   fd_0	set	4
+   136                        	.block	39
+   137                        ;    return (1);
+   138                        	.sym	fd,4,5,6,16
+   139                        	.line	40
+   140 00:0008: A9 01 00     	lda	#$1
+   141 00:000B: A8           	tay
+   142 00:000C: A5 02        	lda	<L2+2
+   143 00:000E: 85 04        	sta	<L2+2+2
+   144 00:0010: A5 01        	lda	<L2+1
+   145 00:0012: 85 03        	sta	<L2+1+2
+   146 00:0014: 2B           	pld
+   147 00:0015: 3B           	tsc
+   148 00:0016: 18           	clc
+   149 00:0017: 69 02 00     	adc	#L2+2
+   150 00:001A: 1B           	tcs
+   151 00:001B: 98           	tya
+   152 00:001C: 6B           	rtl
+   153                        ;}
+   154                        	.line	41
+   155                        	.endblock	41
+   156             00000000   L2	equ	0
+   157             00000001   L3	equ	1
+   158                        	ends
+   159                        	efunc
+   160                        	.endfunc	41,1,0
+   161                        	.line	41
+   162                        ;
+   163                        ;/* Read a number of bytes from the ACIA into a buffer */
+   164                        ;size_t read (int fd, void *pData, size_t len)
+   165                        ;{
+   166                        	.line	44
+   167                        	.line	45
+   168                        	code
+  Wed Apr 14 2021  0:19                                                                                                    Page 4
+
+
+   169                        	xdef	~~read
+   170                        	func
+   171                        	.function	45
+   172                        ~~read:
+   173                        	longa	on
+   174                        	longi	on
+   175 00:001D: 3B           	tsc
+   176 00:001E: 38           	sec
+   177 00:001F: E9 02 00     	sbc	#L6
+   178 00:0022: 1B           	tcs
+   179 00:0023: 0B           	phd
+   180 00:0024: 5B           	tcd
+   181             00000004   fd_0	set	4
+   182             00000006   pData_0	set	6
+   183             0000000A   len_0	set	10
+   184                        	.block	45
+   185                        ;    size_t          offset;
+   186                        ;
+   187                        ;    for (offset = 0; offset < len; ++offset)
+   188             00000000   offset_1	set	0
+   189                        	.sym	offset,0,16,1,16
+   190                        	.sym	fd,4,5,6,16
+   191                        	.sym	pData,6,129,6,32
+   192                        	.sym	len,10,16,6,16
+   193                        	.line	48
+   194 00:0025: 64 01        	stz	<L7+offset_1
+   195 00:0027: 80 11        	bra	L10004
+   196                        L10003:
+   197                        ;        ((uint8_t *) pData)[offset] = aciaRx (1);
+   198                        	.line	49
+   199 00:0029: F4 01 00     	pea	#<$1
+   200 00:002C: 22 xx xx xx  	jsl	~~aciaRx
+   201 00:0030: E2 20        	sep	#$20
+   202                        	longa	off
+   203 00:0032: A4 01        	ldy	<L7+offset_1
+   204 00:0034: 97 08        	sta	[<L6+pData_0],Y
+   205 00:0036: C2 20        	rep	#$20
+   206                        	longa	on
+   207 00:0038: E6 01        	inc	<L7+offset_1
+   208                        L10004:
+   209 00:003A: A5 01        	lda	<L7+offset_1
+   210 00:003C: C5 0C        	cmp	<L6+len_0
+   211 00:003E: 90 E9        	bcc	L10003
+   212                        ;
+   213                        ;    return (len);
+   214                        	.line	51
+   215 00:0040: A5 0C        	lda	<L6+len_0
+   216 00:0042: A8           	tay
+   217 00:0043: A5 04        	lda	<L6+2
+   218 00:0045: 85 0C        	sta	<L6+2+8
+   219 00:0047: A5 03        	lda	<L6+1
+   220 00:0049: 85 0B        	sta	<L6+1+8
+   221 00:004B: 2B           	pld
+   222 00:004C: 3B           	tsc
+   223 00:004D: 18           	clc
+   224 00:004E: 69 0A 00     	adc	#L6+8
+   225 00:0051: 1B           	tcs
+   226 00:0052: 98           	tya
+  Wed Apr 14 2021  0:19                                                                                                    Page 5
+
+
+   227 00:0053: 6B           	rtl
+   228                        ;}
+   229                        	.line	52
+   230                        	.endblock	52
+   231             00000002   L6	equ	2
+   232             00000001   L7	equ	1
+   233                        	ends
+   234                        	efunc
+   235                        	.endfunc	52,1,2
+   236                        	.line	52
+   237                        ;
+   238                        ;/* Write a number of bytes to the ACIA from a buffer */
+   239                        ;size_t write (int fd, void *pData, size_t len)
+   240                        ;{
+   241                        	.line	55
+   242                        	.line	56
+   243                        	code
+   244                        	xdef	~~write
+   245                        	func
+   246                        	.function	56
+   247                        ~~write:
+   248                        	longa	on
+   249                        	longi	on
+   250 00:0054: 3B           	tsc
+   251 00:0055: 38           	sec
+   252 00:0056: E9 02 00     	sbc	#L11
+   253 00:0059: 1B           	tcs
+   254 00:005A: 0B           	phd
+   255 00:005B: 5B           	tcd
+   256             00000004   fd_0	set	4
+   257             00000006   pData_0	set	6
+   258             0000000A   len_0	set	10
+   259                        	.block	56
+   260                        ;    size_t          offset;
+   261                        ;
+   262                        ;    for (offset = 0; offset < len; ++offset)
+   263             00000000   offset_1	set	0
+   264                        	.sym	offset,0,16,1,16
+   265                        	.sym	fd,4,5,6,16
+   266                        	.sym	pData,6,129,6,32
+   267                        	.sym	len,10,16,6,16
+   268                        	.line	59
+   269 00:005C: 64 01        	stz	<L12+offset_1
+   270 00:005E: 80 0B        	bra	L10008
+   271                        L10007:
+   272                        ;        aciaTx (((const uint8_t *) pData)[offset]);
+   273                        	.line	60
+   274 00:0060: A4 01        	ldy	<L12+offset_1
+   275 00:0062: B7 08        	lda	[<L11+pData_0],Y
+   276 00:0064: 48           	pha
+   277 00:0065: 22 xx xx xx  	jsl	~~aciaTx
+   278 00:0069: E6 01        	inc	<L12+offset_1
+   279                        L10008:
+   280 00:006B: A5 01        	lda	<L12+offset_1
+   281 00:006D: C5 0C        	cmp	<L11+len_0
+   282 00:006F: 90 EF        	bcc	L10007
+   283                        ;
+   284                        ;    return (len);
+  Wed Apr 14 2021  0:19                                                                                                    Page 6
+
+
+   285                        	.line	62
+   286 00:0071: A5 0C        	lda	<L11+len_0
+   287 00:0073: A8           	tay
+   288 00:0074: A5 04        	lda	<L11+2
+   289 00:0076: 85 0C        	sta	<L11+2+8
+   290 00:0078: A5 03        	lda	<L11+1
+   291 00:007A: 85 0B        	sta	<L11+1+8
+   292 00:007C: 2B           	pld
+   293 00:007D: 3B           	tsc
+   294 00:007E: 18           	clc
+   295 00:007F: 69 0A 00     	adc	#L11+8
+   296 00:0082: 1B           	tcs
+   297 00:0083: 98           	tya
+   298 00:0084: 6B           	rtl
+   299                        ;}
+   300                        	.line	63
+   301                        	.endblock	63
+   302             00000002   L11	equ	2
+   303             00000001   L12	equ	1
+   304                        	ends
+   305                        	efunc
+   306                        	.endfunc	63,1,2
+   307                        	.line	63
+   308                        ;
+   309                        ;/* The following are defined only to satisfy the linker */
+   310                        ;int lseek (int fd, long pos, int xx)
+   311                        ;{
+   312                        	.line	66
+   313                        	.line	67
+   314                        	code
+   315                        	xdef	~~lseek
+   316                        	func
+   317                        	.function	67
+   318                        ~~lseek:
+   319                        	longa	on
+   320                        	longi	on
+   321 00:0085: 3B           	tsc
+   322 00:0086: 38           	sec
+   323 00:0087: E9 00 00     	sbc	#L16
+   324 00:008A: 1B           	tcs
+   325 00:008B: 0B           	phd
+   326 00:008C: 5B           	tcd
+   327             00000004   fd_0	set	4
+   328             00000006   pos_0	set	6
+   329             0000000A   xx_0	set	10
+   330                        	.block	67
+   331                        ;    return (0);
+   332                        	.sym	fd,4,5,6,16
+   333                        	.sym	pos,6,7,6,32
+   334                        	.sym	xx,10,5,6,16
+   335                        	.line	68
+   336 00:008D: A9 00 00     	lda	#$0
+   337 00:0090: A8           	tay
+   338 00:0091: A5 02        	lda	<L16+2
+   339 00:0093: 85 0A        	sta	<L16+2+8
+   340 00:0095: A5 01        	lda	<L16+1
+   341 00:0097: 85 09        	sta	<L16+1+8
+   342 00:0099: 2B           	pld
+  Wed Apr 14 2021  0:19                                                                                                    Page 7
+
+
+   343 00:009A: 3B           	tsc
+   344 00:009B: 18           	clc
+   345 00:009C: 69 08 00     	adc	#L16+8
+   346 00:009F: 1B           	tcs
+   347 00:00A0: 98           	tya
+   348 00:00A1: 6B           	rtl
+   349                        ;}
+   350                        	.line	69
+   351                        	.endblock	69
+   352             00000000   L16	equ	0
+   353             00000001   L17	equ	1
+   354                        	ends
+   355                        	efunc
+   356                        	.endfunc	69,1,0
+   357                        	.line	69
+   358                        ;
+   359                        ;int close (int fd)
+   360                        ;{
+   361                        	.line	71
+   362                        	.line	72
+   363                        	code
+   364                        	xdef	~~close
+   365                        	func
+   366                        	.function	72
+   367                        ~~close:
+   368                        	longa	on
+   369                        	longi	on
+   370 00:00A2: 3B           	tsc
+   371 00:00A3: 38           	sec
+   372 00:00A4: E9 00 00     	sbc	#L20
+   373 00:00A7: 1B           	tcs
+   374 00:00A8: 0B           	phd
+   375 00:00A9: 5B           	tcd
+   376             00000004   fd_0	set	4
+   377                        	.block	72
+   378                        ;    return (0);
+   379                        	.sym	fd,4,5,6,16
+   380                        	.line	73
+   381 00:00AA: A9 00 00     	lda	#$0
+   382 00:00AD: A8           	tay
+   383 00:00AE: A5 02        	lda	<L20+2
+   384 00:00B0: 85 04        	sta	<L20+2+2
+   385 00:00B2: A5 01        	lda	<L20+1
+   386 00:00B4: 85 03        	sta	<L20+1+2
+   387 00:00B6: 2B           	pld
+   388 00:00B7: 3B           	tsc
+   389 00:00B8: 18           	clc
+   390 00:00B9: 69 02 00     	adc	#L20+2
+   391 00:00BC: 1B           	tcs
+   392 00:00BD: 98           	tya
+   393 00:00BE: 6B           	rtl
+   394                        ;}
+   395                        	.line	74
+   396                        	.endblock	74
+   397             00000000   L20	equ	0
+   398             00000001   L21	equ	1
+   399                        	ends
+   400                        	efunc
+  Wed Apr 14 2021  0:19                                                                                                    Page 8
+
+
+   401                        	.endfunc	74,1,0
+   402                        	.line	74
+   403                        ;
+   404                        ;int unlink (const char *pFileName)
+   405                        ;{
+   406                        	.line	76
+   407                        	.line	77
+   408                        	code
+   409                        	xdef	~~unlink
+   410                        	func
+   411                        	.function	77
+   412                        ~~unlink:
+   413                        	longa	on
+   414                        	longi	on
+   415 00:00BF: 3B           	tsc
+   416 00:00C0: 38           	sec
+   417 00:00C1: E9 00 00     	sbc	#L24
+   418 00:00C4: 1B           	tcs
+   419 00:00C5: 0B           	phd
+   420 00:00C6: 5B           	tcd
+   421             00000004   pFileName_0	set	4
+   422                        	.block	77
+   423                        ;    return (0);
+   424                        	.sym	pFileName,4,142,6,32
+   425                        	.line	78
+   426 00:00C7: A9 00 00     	lda	#$0
+   427 00:00CA: A8           	tay
+   428 00:00CB: A5 02        	lda	<L24+2
+   429 00:00CD: 85 06        	sta	<L24+2+4
+   430 00:00CF: A5 01        	lda	<L24+1
+   431 00:00D1: 85 05        	sta	<L24+1+4
+   432 00:00D3: 2B           	pld
+   433 00:00D4: 3B           	tsc
+   434 00:00D5: 18           	clc
+   435 00:00D6: 69 04 00     	adc	#L24+4
+   436 00:00D9: 1B           	tcs
+   437 00:00DA: 98           	tya
+   438 00:00DB: 6B           	rtl
+   439                        ;}
+   440                        	.line	79
+   441                        	.endblock	79
+   442             00000000   L24	equ	0
+   443             00000001   L25	equ	1
+   444                        	ends
+   445                        	efunc
+   446                        	.endfunc	79,1,0
+   447                        	.line	79
+   448                        ;
+   449                        	.line	79
+   450                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\stdio.c",76
+   451                        	xref	~~aciaRx
+   452                        	xref	~~aciaTx
+   453                        	udata
+   454                        	xdef	~~heap_end
+   455                        ~~heap_end
+   456 00:0000:              	ds	1
+   457 00:0001:              	ends
+   458                        	udata
+  Wed Apr 14 2021  0:19                                                                                                    Page 9
+
+
+   459                        	xdef	~~heap_start
+   460                        ~~heap_start
+   461 00:0001:              	ds	8192
+   462 00:2001:              	ends
+   463                        	.sym	~~unlink,~~unlink,69,2,0
+   464                        	.sym	~~close,~~close,69,2,0
+   465                        	.sym	~~lseek,~~lseek,69,2,0
+   466                        	.sym	~~write,~~write,80,2,0
+   467                        	.sym	~~read,~~read,80,2,0
+   468                        	.sym	~~isatty,~~isatty,69,2,0
+   469                        	.sym	~~heap_end,~~heap_end,110,2,0,1
+   470                        	.sym	~~heap_start,~~heap_start,110,2,0,8192
+   471                        	.sym	FILE,0,10,14,160,5
+   472                        	.sym	fpos_t,0,7,14,32
+   473                        	.sym	size_t,0,16,14,16
+   474                        	.sym	va_list,0,142,14,32
+   475                        	.sym	~~aciaRx,~~aciaRx,69,18,0
+   476                        	.sym	~~aciaTx,~~aciaTx,69,18,0
+   477                        	.sym	acia_t,0,10,14,32,4
+   478                        	.sym	pia_t,0,10,14,32,3
+   479                        	.sym	via_t,0,10,14,128,2
+   480                        	.sym	imaxdiv_t,0,10,14,64,1
+   481                        	.sym	uintmax_t,0,18,14,32
+   482                        	.sym	intmax_t,0,7,14,32
+   483                        	.sym	uintptr_t,0,16,14,16
+   484                        	.sym	intptr_t,0,5,14,16
+   485                        	.sym	uint32_t,0,18,14,32
+   486                        	.sym	int32_t,0,7,14,32
+   487                        	.sym	uint16_t,0,16,14,16
+   488                        	.sym	int16_t,0,5,14,16
+   489                        	.sym	uint8_t,0,14,14,8
+   490                        	.sym	int8_t,0,2,14,8
+   491                        	.sym	wchar_t,0,14,14,8
+
+
+      Lines assembled: 491
+      Errors: 0

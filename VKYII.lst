@@ -1,0 +1,460 @@
+  Wed Apr 14 2021  0:19                                                                                                    Page 1
+
+
+                                               ***************************************
+                                               **      WDC 65C816 Macro Assembler   **
+                                               **                                   **
+                                               **     Version 3.49.1- Feb  6 2006    **
+                                               ***************************************
+
+     1                        ;:ts=8
+     2             00000001   R0	equ	1
+     3             00000005   R1	equ	5
+     4             00000009   R2	equ	9
+     5             0000000D   R3	equ	13
+     6                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII.c",0
+     7                        ;#include "FMX.h"
+     8                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",0
+     9                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c816.h",0
+    10                        	.line	33
+    11                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",27
+    12                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c22.h",0
+    13                        	.file	"C:\WDC\Tools\INCLUDE\inttypes.h",0
+    14                        	.stag	fake1_,64,1
+    15                        	.member	quot,0,7,8,32
+    16                        	.member	rem,32,7,8,32
+    17                        	.eos
+    18                        	.line	111
+    19                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c22.h",27
+    20                        	.stag	fake2_,128,2
+    21                        	.member	orb,0,14,8,8
+    22                        	.member	ora,8,14,8,8
+    23                        	.member	ddrb,16,14,8,8
+    24                        	.member	ddra,24,14,8,8
+    25                        	.member	t1cl,32,14,8,8
+    26                        	.member	t1ch,40,14,8,8
+    27                        	.member	t1ll,48,14,8,8
+    28                        	.member	t1lh,56,14,8,8
+    29                        	.member	t2cl,64,14,8,8
+    30                        	.member	t2ch,72,14,8,8
+    31                        	.member	sr,80,14,8,8
+    32                        	.member	acr,88,14,8,8
+    33                        	.member	pcr,96,14,8,8
+    34                        	.member	ifr,104,14,8,8
+    35                        	.member	ier,112,14,8,8
+    36                        	.member	oran,120,14,8,8
+    37                        	.eos
+    38                        	.line	142
+    39                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",28
+    40                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c21.h",0
+    41                        	.file	"C:\WDC\Tools\INCLUDE\inttypes.h",0
+    42                        	.line	111
+    43                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c21.h",27
+    44                        	.stag	fake3_,32,3
+    45                        	.member	pia,0,14,8,8
+    46                        	.member	cra,8,14,8,8
+    47                        	.member	pib,16,14,8,8
+    48                        	.member	crb,24,14,8,8
+    49                        	.eos
+    50                        	.line	81
+    51                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",29
+    52                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c51.h",0
+  Wed Apr 14 2021  0:19                                                                                                    Page 2
+
+
+    53                        	.file	"C:\WDC\Tools\INCLUDE\inttypes.h",0
+    54                        	.line	111
+    55                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c51.h",29
+    56                        	.stag	fake4_,32,4
+    57                        	.member	buf,0,14,8,8
+    58                        	.member	sr,8,14,8,8
+    59                        	.member	cmd,16,14,8,8
+    60                        	.member	ctl,24,14,8,8
+    61                        	.eos
+    62                        	.line	117
+    63                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",30
+    64                        	.line	52
+    65                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII.c",1
+    66                        ;#include "VKYII_CFP9553_GENERAL_def.h"
+    67                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    0
+    68                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_BITMAP_def.h",0
+    69                        	.line	31
+    70                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    1
+    71                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_COLLISION_def.h
+                    ",0
+    72                        	.line	75
+    73                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    2
+    74                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_SPRITE_def.h",0
+    75                        	.line	598
+    76                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    3
+    77                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_TILEMAP_def.h",
+                    0
+    78                        	.line	107
+    79                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    4
+    80                        	.line	133
+    81                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII.c",2
+    82                        ;#include "VKYII.h"
+    83                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII.h",0
+    84                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",0
+    85                        	.line	52
+    86                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII.h",1
+    87                        	.line	3
+    88                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII.c",3
+    89                        ;
+    90                        ;void VKYII_Load_Palette(uint8_t *palette, uint8_t index)
+    91                        ;{
+    92                        	.line	5
+    93                        	.line	6
+    94                        	code
+    95                        	xdef	~~VKYII_Load_Palette
+    96                        	func
+    97                        	.function	6
+    98                        ~~VKYII_Load_Palette:
+    99                        	longa	on
+   100                        	longi	on
+   101 00:0000: 3B           	tsc
+   102 00:0001: 38           	sec
+   103 00:0002: E9 06 00     	sbc	#L2
+  Wed Apr 14 2021  0:19                                                                                                    Page 3
+
+
+   104 00:0005: 1B           	tcs
+   105 00:0006: 0B           	phd
+   106 00:0007: 5B           	tcd
+   107             00000004   palette_0	set	4
+   108             00000008   index_0	set	8
+   109                        	.block	6
+   110                        ;	uint16_t i;
+   111                        ;	switch(index)
+   112             00000000   i_1	set	0
+   113                        	.sym	i,0,16,1,16
+   114                        	.sym	palette,4,142,6,32
+   115                        	.sym	index,8,14,6,8
+   116                        	.line	8
+   117 00:0008: A5 0E        	lda	<L2+index_0
+   118 00:000A: 29 FF 00     	and	#$ff
+   119                        	xref	~~~fsw
+   120 00:000D: 22 xx xx xx  	jsl	~~~fsw
+   121 00:0011: 00 00        	dw	0
+   122 00:0013: 08 00        	dw	8
+   123 00:0015: xx xx        	dw	L10035-1
+   124 00:0017: xx xx        	dw	L10003-1
+   125 00:0019: xx xx        	dw	L10007-1
+   126 00:001B: xx xx        	dw	L10011-1
+   127 00:001D: xx xx        	dw	L10015-1
+   128 00:001F: xx xx        	dw	L10019-1
+   129 00:0021: xx xx        	dw	L10023-1
+   130 00:0023: xx xx        	dw	L10027-1
+   131 00:0025: xx xx        	dw	L10031-1
+   132                        ;	{
+   133                        	.line	9
+   134                        ;		case 0:
+   135                        	.line	10
+   136                        L10003:
+   137                        ;			for(i=0; i<1014; i++)
+   138                        	.line	11
+   139 00:0027: 64 05        	stz	<L3+i_1
+   140                        L10006:
+   141                        ;				((volatile uint8_t *)GRPH_LUT0_PTR)[i] = palette[i];
+   142                        	.line	12
+   143 00:0029: A9 00 20     	lda	#$2000
+   144 00:002C: 85 01        	sta	<R0
+   145 00:002E: A9 AF 00     	lda	#$af
+   146 00:0031: 85 03        	sta	<R0+2
+   147 00:0033: E2 20        	sep	#$20
+   148                        	longa	off
+   149 00:0035: A4 05        	ldy	<L3+i_1
+   150 00:0037: B7 0A        	lda	[<L2+palette_0],Y
+   151 00:0039: 97 01        	sta	[<R0],Y
+   152 00:003B: C2 20        	rep	#$20
+   153                        	longa	on
+   154 00:003D: E6 05        	inc	<L3+i_1
+   155 00:003F: A5 05        	lda	<L3+i_1
+   156 00:0041: C9 F6 03     	cmp	#<$3f6
+   157 00:0044: 90 E3        	bcc	L10006
+   158 00:0046: 82 0A 01     	brl	L14
+   159                        ;			break;
+   160                        	.line	13
+   161                        ;		case 1:
+  Wed Apr 14 2021  0:19                                                                                                    Page 4
+
+
+   162                        	.line	14
+   163                        L10007:
+   164                        ;			for(i=0; i<1014; i++)
+   165                        	.line	15
+   166 00:0049: 64 05        	stz	<L3+i_1
+   167                        L10010:
+   168                        ;				((volatile uint8_t *)GRPH_LUT1_PTR)[i] = palette[i];
+   169                        	.line	16
+   170 00:004B: A9 00 24     	lda	#$2400
+   171 00:004E: 85 01        	sta	<R0
+   172 00:0050: A9 AF 00     	lda	#$af
+   173 00:0053: 85 03        	sta	<R0+2
+   174 00:0055: E2 20        	sep	#$20
+   175                        	longa	off
+   176 00:0057: A4 05        	ldy	<L3+i_1
+   177 00:0059: B7 0A        	lda	[<L2+palette_0],Y
+   178 00:005B: 97 01        	sta	[<R0],Y
+   179 00:005D: C2 20        	rep	#$20
+   180                        	longa	on
+   181 00:005F: E6 05        	inc	<L3+i_1
+   182 00:0061: A5 05        	lda	<L3+i_1
+   183 00:0063: C9 F6 03     	cmp	#<$3f6
+   184 00:0066: 90 E3        	bcc	L10010
+   185 00:0068: 82 E8 00     	brl	L14
+   186                        ;			break;
+   187                        	.line	17
+   188                        ;		case 2:
+   189                        	.line	18
+   190                        L10011:
+   191                        ;			for(i=0; i<1014; i++)
+   192                        	.line	19
+   193 00:006B: 64 05        	stz	<L3+i_1
+   194                        L10014:
+   195                        ;				((volatile uint8_t *)GRPH_LUT2_PTR)[i] = palette[i];
+   196                        	.line	20
+   197 00:006D: A9 00 28     	lda	#$2800
+   198 00:0070: 85 01        	sta	<R0
+   199 00:0072: A9 AF 00     	lda	#$af
+   200 00:0075: 85 03        	sta	<R0+2
+   201 00:0077: E2 20        	sep	#$20
+   202                        	longa	off
+   203 00:0079: A4 05        	ldy	<L3+i_1
+   204 00:007B: B7 0A        	lda	[<L2+palette_0],Y
+   205 00:007D: 97 01        	sta	[<R0],Y
+   206 00:007F: C2 20        	rep	#$20
+   207                        	longa	on
+   208 00:0081: E6 05        	inc	<L3+i_1
+   209 00:0083: A5 05        	lda	<L3+i_1
+   210 00:0085: C9 F6 03     	cmp	#<$3f6
+   211 00:0088: 90 E3        	bcc	L10014
+   212 00:008A: 82 C6 00     	brl	L14
+   213                        ;			break;
+   214                        	.line	21
+   215                        ;		case 3:
+   216                        	.line	22
+   217                        L10015:
+   218                        ;			for(i=0; i<1014; i++)
+   219                        	.line	23
+  Wed Apr 14 2021  0:19                                                                                                    Page 5
+
+
+   220 00:008D: 64 05        	stz	<L3+i_1
+   221                        L10018:
+   222                        ;				((volatile uint8_t *)GRPH_LUT3_PTR)[i] = palette[i];
+   223                        	.line	24
+   224 00:008F: A9 00 2C     	lda	#$2c00
+   225 00:0092: 85 01        	sta	<R0
+   226 00:0094: A9 AF 00     	lda	#$af
+   227 00:0097: 85 03        	sta	<R0+2
+   228 00:0099: E2 20        	sep	#$20
+   229                        	longa	off
+   230 00:009B: A4 05        	ldy	<L3+i_1
+   231 00:009D: B7 0A        	lda	[<L2+palette_0],Y
+   232 00:009F: 97 01        	sta	[<R0],Y
+   233 00:00A1: C2 20        	rep	#$20
+   234                        	longa	on
+   235 00:00A3: E6 05        	inc	<L3+i_1
+   236 00:00A5: A5 05        	lda	<L3+i_1
+   237 00:00A7: C9 F6 03     	cmp	#<$3f6
+   238 00:00AA: 90 E3        	bcc	L10018
+   239 00:00AC: 82 A4 00     	brl	L14
+   240                        ;			break;
+   241                        	.line	25
+   242                        ;		case 4:
+   243                        	.line	26
+   244                        L10019:
+   245                        ;			for(i=0; i<1014; i++)
+   246                        	.line	27
+   247 00:00AF: 64 05        	stz	<L3+i_1
+   248                        L10022:
+   249                        ;				((volatile uint8_t *)GRPH_LUT4_PTR)[i] = palette[i];
+   250                        	.line	28
+   251 00:00B1: A9 00 30     	lda	#$3000
+   252 00:00B4: 85 01        	sta	<R0
+   253 00:00B6: A9 AF 00     	lda	#$af
+   254 00:00B9: 85 03        	sta	<R0+2
+   255 00:00BB: E2 20        	sep	#$20
+   256                        	longa	off
+   257 00:00BD: A4 05        	ldy	<L3+i_1
+   258 00:00BF: B7 0A        	lda	[<L2+palette_0],Y
+   259 00:00C1: 97 01        	sta	[<R0],Y
+   260 00:00C3: C2 20        	rep	#$20
+   261                        	longa	on
+   262 00:00C5: E6 05        	inc	<L3+i_1
+   263 00:00C7: A5 05        	lda	<L3+i_1
+   264 00:00C9: C9 F6 03     	cmp	#<$3f6
+   265 00:00CC: 90 E3        	bcc	L10022
+   266 00:00CE: 82 82 00     	brl	L14
+   267                        ;			break;
+   268                        	.line	29
+   269                        ;		case 5:
+   270                        	.line	30
+   271                        L10023:
+   272                        ;			for(i=0; i<1014; i++)
+   273                        	.line	31
+   274 00:00D1: 64 05        	stz	<L3+i_1
+   275                        L10026:
+   276                        ;				((volatile uint8_t *)GRPH_LUT5_PTR)[i] = palette[i];
+   277                        	.line	32
+  Wed Apr 14 2021  0:19                                                                                                    Page 6
+
+
+   278 00:00D3: A9 00 34     	lda	#$3400
+   279 00:00D6: 85 01        	sta	<R0
+   280 00:00D8: A9 AF 00     	lda	#$af
+   281 00:00DB: 85 03        	sta	<R0+2
+   282 00:00DD: E2 20        	sep	#$20
+   283                        	longa	off
+   284 00:00DF: A4 05        	ldy	<L3+i_1
+   285 00:00E1: B7 0A        	lda	[<L2+palette_0],Y
+   286 00:00E3: 97 01        	sta	[<R0],Y
+   287 00:00E5: C2 20        	rep	#$20
+   288                        	longa	on
+   289 00:00E7: E6 05        	inc	<L3+i_1
+   290 00:00E9: A5 05        	lda	<L3+i_1
+   291 00:00EB: C9 F6 03     	cmp	#<$3f6
+   292 00:00EE: 90 E3        	bcc	L10026
+   293 00:00F0: 80 61        	bra	L14
+   294                        ;			break;
+   295                        	.line	33
+   296                        ;		case 6:
+   297                        	.line	34
+   298                        L10027:
+   299                        ;			for(i=0; i<1014; i++)
+   300                        	.line	35
+   301 00:00F2: 64 05        	stz	<L3+i_1
+   302                        L10030:
+   303                        ;				((volatile uint8_t *)GRPH_LUT6_PTR)[i] = palette[i];
+   304                        	.line	36
+   305 00:00F4: A9 00 38     	lda	#$3800
+   306 00:00F7: 85 01        	sta	<R0
+   307 00:00F9: A9 AF 00     	lda	#$af
+   308 00:00FC: 85 03        	sta	<R0+2
+   309 00:00FE: E2 20        	sep	#$20
+   310                        	longa	off
+   311 00:0100: A4 05        	ldy	<L3+i_1
+   312 00:0102: B7 0A        	lda	[<L2+palette_0],Y
+   313 00:0104: 97 01        	sta	[<R0],Y
+   314 00:0106: C2 20        	rep	#$20
+   315                        	longa	on
+   316 00:0108: E6 05        	inc	<L3+i_1
+   317 00:010A: A5 05        	lda	<L3+i_1
+   318 00:010C: C9 F6 03     	cmp	#<$3f6
+   319 00:010F: 90 E3        	bcc	L10030
+   320 00:0111: 80 40        	bra	L14
+   321                        ;			break;
+   322                        	.line	37
+   323                        ;		case 7:
+   324                        	.line	38
+   325                        L10031:
+   326                        ;			for(i=0; i<1014; i++)
+   327                        	.line	39
+   328 00:0113: 64 05        	stz	<L3+i_1
+   329                        L10034:
+   330                        ;				((volatile uint8_t *)GRPH_LUT7_PTR)[i] = palette[i];
+   331                        	.line	40
+   332 00:0115: A9 00 3C     	lda	#$3c00
+   333 00:0118: 85 01        	sta	<R0
+   334 00:011A: A9 AF 00     	lda	#$af
+   335 00:011D: 85 03        	sta	<R0+2
+  Wed Apr 14 2021  0:19                                                                                                    Page 7
+
+
+   336 00:011F: E2 20        	sep	#$20
+   337                        	longa	off
+   338 00:0121: A4 05        	ldy	<L3+i_1
+   339 00:0123: B7 0A        	lda	[<L2+palette_0],Y
+   340 00:0125: 97 01        	sta	[<R0],Y
+   341 00:0127: C2 20        	rep	#$20
+   342                        	longa	on
+   343 00:0129: E6 05        	inc	<L3+i_1
+   344 00:012B: A5 05        	lda	<L3+i_1
+   345 00:012D: C9 F6 03     	cmp	#<$3f6
+   346 00:0130: 90 E3        	bcc	L10034
+   347 00:0132: 80 1F        	bra	L14
+   348                        ;			break;
+   349                        	.line	41
+   350                        ;		default:
+   351                        	.line	42
+   352                        L10035:
+   353                        ;			for(i=0; i<1014; i++)
+   354                        	.line	43
+   355 00:0134: 64 05        	stz	<L3+i_1
+   356                        L20000:
+   357                        ;				((volatile uint8_t *)GRPH_LUT0_PTR)[i] = palette[i];
+   358                        	.line	44
+   359 00:0136: A9 00 20     	lda	#$2000
+   360 00:0139: 85 01        	sta	<R0
+   361 00:013B: A9 AF 00     	lda	#$af
+   362 00:013E: 85 03        	sta	<R0+2
+   363 00:0140: E2 20        	sep	#$20
+   364                        	longa	off
+   365 00:0142: A4 05        	ldy	<L3+i_1
+   366 00:0144: B7 0A        	lda	[<L2+palette_0],Y
+   367 00:0146: 97 01        	sta	[<R0],Y
+   368 00:0148: C2 20        	rep	#$20
+   369                        	longa	on
+   370 00:014A: E6 05        	inc	<L3+i_1
+   371 00:014C: A5 05        	lda	<L3+i_1
+   372 00:014E: C9 F6 03     	cmp	#<$3f6
+   373 00:0151: 90 E3        	bcc	L20000
+   374                        ;			break;
+   375                        	.line	45
+   376                        ;	};
+   377                        	.line	46
+   378                        	.line	46
+   379                        ;	return;
+   380                        	.line	47
+   381                        L14:
+   382 00:0153: A5 08        	lda	<L2+2
+   383 00:0155: 85 0E        	sta	<L2+2+6
+   384 00:0157: A5 07        	lda	<L2+1
+   385 00:0159: 85 0D        	sta	<L2+1+6
+   386 00:015B: 2B           	pld
+   387 00:015C: 3B           	tsc
+   388 00:015D: 18           	clc
+   389 00:015E: 69 0C 00     	adc	#L2+6
+   390 00:0161: 1B           	tcs
+   391 00:0162: 6B           	rtl
+   392                        ;}
+   393                        	.line	48
+  Wed Apr 14 2021  0:19                                                                                                    Page 8
+
+
+   394                        	.endblock	48
+   395             00000006   L2	equ	6
+   396             00000005   L3	equ	5
+   397                        	ends
+   398                        	efunc
+   399                        	.endfunc	48,5,6
+   400                        	.line	48
+   401                        ;
+   402                        	.line	48
+   403                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII.c",5
+   404                        	.sym	~~VKYII_Load_Palette,~~VKYII_Load_Palette,65,2,0
+   405                        	.sym	acia_t,0,10,14,32,4
+   406                        	.sym	pia_t,0,10,14,32,3
+   407                        	.sym	via_t,0,10,14,128,2
+   408                        	.sym	imaxdiv_t,0,10,14,64,1
+   409                        	.sym	uintmax_t,0,18,14,32
+   410                        	.sym	intmax_t,0,7,14,32
+   411                        	.sym	uintptr_t,0,16,14,16
+   412                        	.sym	intptr_t,0,5,14,16
+   413                        	.sym	uint32_t,0,18,14,32
+   414                        	.sym	int32_t,0,7,14,32
+   415                        	.sym	uint16_t,0,16,14,16
+   416                        	.sym	int16_t,0,5,14,16
+   417                        	.sym	uint8_t,0,14,14,8
+   418                        	.sym	int8_t,0,2,14,8
+   419                        	.sym	wchar_t,0,14,14,8
+
+
+      Lines assembled: 419
+      Errors: 0

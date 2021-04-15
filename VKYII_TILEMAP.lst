@@ -1,0 +1,281 @@
+  Wed Apr 14 2021  0:19                                                                                                    Page 1
+
+
+                                               ***************************************
+                                               **      WDC 65C816 Macro Assembler   **
+                                               **                                   **
+                                               **     Version 3.49.1- Feb  6 2006    **
+                                               ***************************************
+
+     1                        ;:ts=8
+     2             00000001   R0	equ	1
+     3             00000005   R1	equ	5
+     4             00000009   R2	equ	9
+     5             0000000D   R3	equ	13
+     6                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_TILEMAP.c",0
+     7                        ;#include "FMX.h"
+     8                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",0
+     9                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c816.h",0
+    10                        	.line	33
+    11                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",27
+    12                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c22.h",0
+    13                        	.file	"C:\WDC\Tools\INCLUDE\inttypes.h",0
+    14                        	.stag	fake1_,64,1
+    15                        	.member	quot,0,7,8,32
+    16                        	.member	rem,32,7,8,32
+    17                        	.eos
+    18                        	.line	111
+    19                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c22.h",27
+    20                        	.stag	fake2_,128,2
+    21                        	.member	orb,0,14,8,8
+    22                        	.member	ora,8,14,8,8
+    23                        	.member	ddrb,16,14,8,8
+    24                        	.member	ddra,24,14,8,8
+    25                        	.member	t1cl,32,14,8,8
+    26                        	.member	t1ch,40,14,8,8
+    27                        	.member	t1ll,48,14,8,8
+    28                        	.member	t1lh,56,14,8,8
+    29                        	.member	t2cl,64,14,8,8
+    30                        	.member	t2ch,72,14,8,8
+    31                        	.member	sr,80,14,8,8
+    32                        	.member	acr,88,14,8,8
+    33                        	.member	pcr,96,14,8,8
+    34                        	.member	ifr,104,14,8,8
+    35                        	.member	ier,112,14,8,8
+    36                        	.member	oran,120,14,8,8
+    37                        	.eos
+    38                        	.line	142
+    39                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",28
+    40                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c21.h",0
+    41                        	.file	"C:\WDC\Tools\INCLUDE\inttypes.h",0
+    42                        	.line	111
+    43                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c21.h",27
+    44                        	.stag	fake3_,32,3
+    45                        	.member	pia,0,14,8,8
+    46                        	.member	cra,8,14,8,8
+    47                        	.member	pib,16,14,8,8
+    48                        	.member	crb,24,14,8,8
+    49                        	.eos
+    50                        	.line	81
+    51                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",29
+    52                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c51.h",0
+  Wed Apr 14 2021  0:19                                                                                                    Page 2
+
+
+    53                        	.file	"C:\WDC\Tools\INCLUDE\inttypes.h",0
+    54                        	.line	111
+    55                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c51.h",29
+    56                        	.stag	fake4_,32,4
+    57                        	.member	buf,0,14,8,8
+    58                        	.member	sr,8,14,8,8
+    59                        	.member	cmd,16,14,8,8
+    60                        	.member	ctl,24,14,8,8
+    61                        	.eos
+    62                        	.line	117
+    63                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",30
+    64                        	.line	52
+    65                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_TILEMAP.c",1
+    66                        ;#include "VKYII_CFP9553_GENERAL_def.h"
+    67                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    0
+    68                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_BITMAP_def.h",0
+    69                        	.line	31
+    70                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    1
+    71                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_COLLISION_def.h
+                    ",0
+    72                        	.line	75
+    73                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    2
+    74                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_SPRITE_def.h",0
+    75                        	.line	598
+    76                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    3
+    77                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_TILEMAP_def.h",
+                    0
+    78                        	.line	107
+    79                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    4
+    80                        	.line	133
+    81                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_TILEMAP.c",2
+    82                        ;#include "VKYII_CFP9553_TILEMAP_def.h"
+    83                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_TILEMAP_def.h",
+                    0
+    84                        	.line	107
+    85                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_TILEMAP.c",3
+    86                        ;#include "VKYII_TILEMAP.h"
+    87                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_TILEMAP.h",0
+    88                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    0
+    89                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_BITMAP_def.h",0
+    90                        	.line	31
+    91                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    1
+    92                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_COLLISION_def.h
+                    ",0
+    93                        	.line	75
+    94                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    2
+    95                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_SPRITE_def.h",0
+    96                        	.line	598
+    97                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    3
+  Wed Apr 14 2021  0:19                                                                                                    Page 3
+
+
+    98                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_TILEMAP_def.h",
+                    0
+    99                        	.line	107
+   100                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    4
+   101                        	.line	133
+   102                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_TILEMAP.h",1
+   103                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_TILEMAP_def.h",
+                    0
+   104                        	.line	107
+   105                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_TILEMAP.h",2
+   106                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",0
+   107                        	.line	52
+   108                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_TILEMAP.h",3
+   109                        	.line	6
+   110                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_TILEMAP.c",4
+   111                        ;
+   112                        ;
+   113                        ;void VKYII_Load_Tille_Map(far uint8_t *tile_Map, far uint8_t * RAM_address,uint32_t size)
+   114                        ;{
+   115                        	.line	7
+   116                        	.line	8
+   117                        	code
+   118                        	xdef	~~VKYII_Load_Tille_Map
+   119                        	func
+   120                        	.function	8
+   121                        ~~VKYII_Load_Tille_Map:
+   122                        	longa	on
+   123                        	longi	on
+   124 00:0000: 3B           	tsc
+   125 00:0001: 38           	sec
+   126 00:0002: E9 0C 00     	sbc	#L2
+   127 00:0005: 1B           	tcs
+   128 00:0006: 0B           	phd
+   129 00:0007: 5B           	tcd
+   130             00000004   tile_Map_0	set	4
+   131             00000008   RAM_address_0	set	8
+   132             0000000C   size_0	set	12
+   133                        	.block	8
+   134                        ;
+   135                        ;	uint32_t i=0,j=0;
+   136                        ;	
+   137                        ;	for(i = 0; i<size; i++)
+   138             00000000   i_1	set	0
+   139             00000004   j_1	set	4
+   140                        	.sym	i,0,18,1,32
+   141                        	.sym	j,4,18,1,32
+   142                        	.sym	tile_Map,4,142,6,32
+   143                        	.sym	RAM_address,8,142,6,32
+   144                        	.sym	size,12,18,6,32
+   145 00:0008: 64 05        	stz	<L3+i_1
+   146 00:000A: 64 07        	stz	<L3+i_1+2
+   147 00:000C: 64 09        	stz	<L3+j_1
+   148 00:000E: 64 0B        	stz	<L3+j_1+2
+   149                        	.line	12
+   150 00:0010: 64 05        	stz	<L3+i_1
+   151 00:0012: 64 07        	stz	<L3+i_1+2
+   152 00:0014: 80 34        	bra	L10004
+  Wed Apr 14 2021  0:19                                                                                                    Page 4
+
+
+   153                        L10003:
+   154                        ;	{
+   155                        	.line	13
+   156                        ;		RAM_address[j] = tile_Map[i];
+   157                        	.line	14
+   158 00:0016: E2 20        	sep	#$20
+   159                        	longa	off
+   160 00:0018: A4 05        	ldy	<L3+i_1
+   161 00:001A: B7 10        	lda	[<L2+tile_Map_0],Y
+   162 00:001C: A4 09        	ldy	<L3+j_1
+   163 00:001E: 97 14        	sta	[<L2+RAM_address_0],Y
+   164 00:0020: C2 20        	rep	#$20
+   165                        	longa	on
+   166                        ;		RAM_address[j+1] = 0;
+   167                        	.line	15
+   168 00:0022: A9 01 00     	lda	#$1
+   169 00:0025: 18           	clc
+   170 00:0026: 65 09        	adc	<L3+j_1
+   171 00:0028: A8           	tay
+   172 00:0029: A9 00 00     	lda	#$0
+   173 00:002C: 65 0B        	adc	<L3+j_1+2
+   174 00:002E: 85 03        	sta	<R0+2
+   175 00:0030: E2 20        	sep	#$20
+   176                        	longa	off
+   177 00:0032: A9 00        	lda	#$0
+   178 00:0034: 97 14        	sta	[<L2+RAM_address_0],Y
+   179 00:0036: C2 20        	rep	#$20
+   180                        	longa	on
+   181                        ;		j+=2;
+   182                        	.line	16
+   183 00:0038: A9 02 00     	lda	#$2
+   184 00:003B: 18           	clc
+   185 00:003C: 65 09        	adc	<L3+j_1
+   186 00:003E: 85 09        	sta	<L3+j_1
+   187 00:0040: 90 02        	bcc	L10001
+   188 00:0042: E6 0B        	inc	<L3+j_1+2
+   189                        ;	}
+   190                        	.line	17
+   191                        L10001:
+   192 00:0044: E6 05        	inc	<L3+i_1
+   193 00:0046: D0 02        	bne	L10004
+   194 00:0048: E6 07        	inc	<L3+i_1+2
+   195                        L10004:
+   196 00:004A: A5 05        	lda	<L3+i_1
+   197 00:004C: C5 18        	cmp	<L2+size_0
+   198 00:004E: A5 07        	lda	<L3+i_1+2
+   199 00:0050: E5 1A        	sbc	<L2+size_0+2
+   200 00:0052: 90 C2        	bcc	L10003
+   201                        ;	return;
+   202                        	.line	18
+   203 00:0054: A5 0E        	lda	<L2+2
+   204 00:0056: 85 1A        	sta	<L2+2+12
+   205 00:0058: A5 0D        	lda	<L2+1
+   206 00:005A: 85 19        	sta	<L2+1+12
+   207 00:005C: 2B           	pld
+   208 00:005D: 3B           	tsc
+   209 00:005E: 18           	clc
+   210 00:005F: 69 18 00     	adc	#L2+12
+  Wed Apr 14 2021  0:19                                                                                                    Page 5
+
+
+   211 00:0062: 1B           	tcs
+   212 00:0063: 6B           	rtl
+   213                        ;}
+   214                        	.line	19
+   215                        	.endblock	19
+   216             0000000C   L2	equ	12
+   217             00000005   L3	equ	5
+   218                        	ends
+   219                        	efunc
+   220                        	.endfunc	19,5,12
+   221                        	.line	19
+   222                        ;
+   223                        	.line	19
+   224                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_TILEMAP.c",7
+   225                        	.sym	~~VKYII_Load_Tille_Map,~~VKYII_Load_Tille_Map,65,2,0
+   226                        	.sym	acia_t,0,10,14,32,4
+   227                        	.sym	pia_t,0,10,14,32,3
+   228                        	.sym	via_t,0,10,14,128,2
+   229                        	.sym	imaxdiv_t,0,10,14,64,1
+   230                        	.sym	uintmax_t,0,18,14,32
+   231                        	.sym	intmax_t,0,7,14,32
+   232                        	.sym	uintptr_t,0,16,14,16
+   233                        	.sym	intptr_t,0,5,14,16
+   234                        	.sym	uint32_t,0,18,14,32
+   235                        	.sym	int32_t,0,7,14,32
+   236                        	.sym	uint16_t,0,16,14,16
+   237                        	.sym	int16_t,0,5,14,16
+   238                        	.sym	uint8_t,0,14,14,8
+   239                        	.sym	int8_t,0,2,14,8
+   240                        	.sym	wchar_t,0,14,14,8
+
+
+      Lines assembled: 240
+      Errors: 0

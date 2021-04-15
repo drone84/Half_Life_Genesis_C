@@ -1,0 +1,1820 @@
+  Wed Apr 14 2021  0:19                                                                                                    Page 1
+
+
+                                               ***************************************
+                                               **      WDC 65C816 Macro Assembler   **
+                                               **                                   **
+                                               **     Version 3.49.1- Feb  6 2006    **
+                                               ***************************************
+
+     1                        ;:ts=8
+     2             00000001   R0	equ	1
+     3             00000005   R1	equ	5
+     4             00000009   R2	equ	9
+     5             0000000D   R3	equ	13
+     6                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\Util.c",0
+     7                        ;#include "FMX.h"
+     8                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",0
+     9                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c816.h",0
+    10                        	.line	33
+    11                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",27
+    12                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c22.h",0
+    13                        	.file	"C:\WDC\Tools\INCLUDE\inttypes.h",0
+    14                        	.stag	fake1_,64,1
+    15                        	.member	quot,0,7,8,32
+    16                        	.member	rem,32,7,8,32
+    17                        	.eos
+    18                        	.line	111
+    19                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c22.h",27
+    20                        	.stag	fake2_,128,2
+    21                        	.member	orb,0,14,8,8
+    22                        	.member	ora,8,14,8,8
+    23                        	.member	ddrb,16,14,8,8
+    24                        	.member	ddra,24,14,8,8
+    25                        	.member	t1cl,32,14,8,8
+    26                        	.member	t1ch,40,14,8,8
+    27                        	.member	t1ll,48,14,8,8
+    28                        	.member	t1lh,56,14,8,8
+    29                        	.member	t2cl,64,14,8,8
+    30                        	.member	t2ch,72,14,8,8
+    31                        	.member	sr,80,14,8,8
+    32                        	.member	acr,88,14,8,8
+    33                        	.member	pcr,96,14,8,8
+    34                        	.member	ifr,104,14,8,8
+    35                        	.member	ier,112,14,8,8
+    36                        	.member	oran,120,14,8,8
+    37                        	.eos
+    38                        	.line	142
+    39                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",28
+    40                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c21.h",0
+    41                        	.file	"C:\WDC\Tools\INCLUDE\inttypes.h",0
+    42                        	.line	111
+    43                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c21.h",27
+    44                        	.stag	fake3_,32,3
+    45                        	.member	pia,0,14,8,8
+    46                        	.member	cra,8,14,8,8
+    47                        	.member	pib,16,14,8,8
+    48                        	.member	crb,24,14,8,8
+    49                        	.eos
+    50                        	.line	81
+    51                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",29
+    52                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c51.h",0
+  Wed Apr 14 2021  0:19                                                                                                    Page 2
+
+
+    53                        	.file	"C:\WDC\Tools\INCLUDE\inttypes.h",0
+    54                        	.line	111
+    55                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\w65c51.h",29
+    56                        	.stag	fake4_,32,4
+    57                        	.member	buf,0,14,8,8
+    58                        	.member	sr,8,14,8,8
+    59                        	.member	cmd,16,14,8,8
+    60                        	.member	ctl,24,14,8,8
+    61                        	.eos
+    62                        	.line	117
+    63                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",30
+    64                        	.line	52
+    65                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\Util.c",1
+    66                        ;#include "Util.h"
+    67                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\Util.h",0
+    68                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\FMX.h",0
+    69                        	.line	52
+    70                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\Util.h",1
+    71                        	.line	14
+    72                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\Util.c",2
+    73                        ;#include "VKYII_CFP9553_GENERAL_def.h"
+    74                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    0
+    75                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_BITMAP_def.h",0
+    76                        	.line	31
+    77                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    1
+    78                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_COLLISION_def.h
+                    ",0
+    79                        	.line	75
+    80                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    2
+    81                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_SPRITE_def.h",0
+    82                        	.line	598
+    83                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    3
+    84                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_TILEMAP_def.h",
+                    0
+    85                        	.line	107
+    86                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\VKYII_CFP9553_GENERAL_def.h",
+                    4
+    87                        	.line	133
+    88                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\Util.c",3
+    89                        ;
+    90                        ;const uint8_t HEX_to_STR[16] = "0123456789ABCDEF";
+    91                        	data
+    92                        	xdef	~~HEX_to_STR
+    93                        ~~HEX_to_STR:
+    94 00:0000: 30 31 32 33  	db	$30,$31,$32,$33,$34,$35,$36,$37,$38,$39
+       00:0004: 34 35 36 37 
+       00:0008: 38 39 
+    95 00:000A: 41 42 43 44  	db	$41,$42,$43,$44,$45,$46
+       00:000E: 45 46 
+    96 00:0010:              	ends
+    97                        	data
+    98                        L1:
+    99 00:0010: 30 31 32 33  	db	$30,$31,$32,$33,$34,$35,$36,$37,$38,$39,$41,$42,$43,$44,$45
+       00:0014: 34 35 36 37 
+  Wed Apr 14 2021  0:19                                                                                                    Page 3
+
+
+       00:0018: 38 39 41 42 
+       00:001C: 43 44 45 
+   100 00:001F: 46 00        	db	$46,$00
+   101 00:0021:              	ends
+   102                        ;
+   103                        ;void Copy(far uint8_t  *source, far uint8_t *destination, uint32_t size, uint32_t ofset)
+   104                        ;{
+   105                        	.line	7
+   106                        	.line	8
+   107                        	code
+   108                        	xdef	~~Copy
+   109                        	func
+   110                        	.function	8
+   111                        ~~Copy:
+   112                        	longa	on
+   113                        	longi	on
+   114 00:0000: 3B           	tsc
+   115 00:0001: 38           	sec
+   116 00:0002: E9 04 00     	sbc	#L3
+   117 00:0005: 1B           	tcs
+   118 00:0006: 0B           	phd
+   119 00:0007: 5B           	tcd
+   120             00000004   source_0	set	4
+   121             00000008   destination_0	set	8
+   122             0000000C   size_0	set	12
+   123             00000010   ofset_0	set	16
+   124                        	.block	8
+   125                        ;	uint32_t i;
+   126                        ;	source = source + ofset;
+   127             00000000   i_1	set	0
+   128                        	.sym	i,0,18,1,32
+   129                        	.sym	source,4,142,6,32
+   130                        	.sym	destination,8,142,6,32
+   131                        	.sym	size,12,18,6,32
+   132                        	.sym	ofset,16,18,6,32
+   133                        	.line	10
+   134 00:0008: A5 08        	lda	<L3+source_0
+   135 00:000A: 18           	clc
+   136 00:000B: 65 14        	adc	<L3+ofset_0
+   137 00:000D: 85 08        	sta	<L3+source_0
+   138                        ;	for(i = 0; i<size; i++){
+   139                        	.line	11
+   140 00:000F: 64 01        	stz	<L4+i_1
+   141 00:0011: 64 03        	stz	<L4+i_1+2
+   142 00:0013: 80 10        	bra	L10004
+   143                        L10003:
+   144                        	.line	11
+   145                        ;		destination[i] = source[i];
+   146                        	.line	12
+   147 00:0015: E2 20        	sep	#$20
+   148                        	longa	off
+   149 00:0017: A4 01        	ldy	<L4+i_1
+   150 00:0019: B7 08        	lda	[<L3+source_0],Y
+   151 00:001B: 97 0C        	sta	[<L3+destination_0],Y
+   152 00:001D: C2 20        	rep	#$20
+   153                        	longa	on
+   154                        ;	}
+   155                        	.line	13
+  Wed Apr 14 2021  0:19                                                                                                    Page 4
+
+
+   156 00:001F: E6 01        	inc	<L4+i_1
+   157 00:0021: D0 02        	bne	L10004
+   158 00:0023: E6 03        	inc	<L4+i_1+2
+   159                        L10004:
+   160 00:0025: A5 01        	lda	<L4+i_1
+   161 00:0027: C5 10        	cmp	<L3+size_0
+   162 00:0029: A5 03        	lda	<L4+i_1+2
+   163 00:002B: E5 12        	sbc	<L3+size_0+2
+   164 00:002D: 90 E6        	bcc	L10003
+   165                        ;	return;
+   166                        	.line	14
+   167 00:002F: A5 06        	lda	<L3+2
+   168 00:0031: 85 16        	sta	<L3+2+16
+   169 00:0033: A5 05        	lda	<L3+1
+   170 00:0035: 85 15        	sta	<L3+1+16
+   171 00:0037: 2B           	pld
+   172 00:0038: 3B           	tsc
+   173 00:0039: 18           	clc
+   174 00:003A: 69 14 00     	adc	#L3+16
+   175 00:003D: 1B           	tcs
+   176 00:003E: 6B           	rtl
+   177                        ;}
+   178                        	.line	15
+   179                        	.endblock	15
+   180             00000004   L3	equ	4
+   181             00000001   L4	equ	1
+   182                        	ends
+   183                        	efunc
+   184                        	.endfunc	15,1,4
+   185                        	.line	15
+   186                        ;
+   187                        ;void Set(far uint8_t *address, uint32_t size, uint8_t value)
+   188                        ;{
+   189                        	.line	17
+   190                        	.line	18
+   191                        	code
+   192                        	xdef	~~Set
+   193                        	func
+   194                        	.function	18
+   195                        ~~Set:
+   196                        	longa	on
+   197                        	longi	on
+   198 00:003F: 3B           	tsc
+   199 00:0040: 38           	sec
+   200 00:0041: E9 04 00     	sbc	#L9
+   201 00:0044: 1B           	tcs
+   202 00:0045: 0B           	phd
+   203 00:0046: 5B           	tcd
+   204             00000004   address_0	set	4
+   205             00000008   size_0	set	8
+   206             0000000C   value_0	set	12
+   207                        	.block	18
+   208                        ;	uint32_t i;
+   209                        ;	for(i = 0; i<size; i++){
+   210             00000000   i_1	set	0
+   211                        	.sym	i,0,18,1,32
+   212                        	.sym	address,4,142,6,32
+   213                        	.sym	size,8,18,6,32
+  Wed Apr 14 2021  0:19                                                                                                    Page 5
+
+
+   214                        	.sym	value,12,14,6,8
+   215                        	.line	20
+   216 00:0047: 64 01        	stz	<L10+i_1
+   217 00:0049: 64 03        	stz	<L10+i_1+2
+   218 00:004B: 80 10        	bra	L10008
+   219                        L10007:
+   220                        	.line	20
+   221                        ;		address[i] =value;
+   222                        	.line	21
+   223 00:004D: E2 20        	sep	#$20
+   224                        	longa	off
+   225 00:004F: A5 10        	lda	<L9+value_0
+   226 00:0051: A4 01        	ldy	<L10+i_1
+   227 00:0053: 97 08        	sta	[<L9+address_0],Y
+   228 00:0055: C2 20        	rep	#$20
+   229                        	longa	on
+   230                        ;	}
+   231                        	.line	22
+   232 00:0057: E6 01        	inc	<L10+i_1
+   233 00:0059: D0 02        	bne	L10008
+   234 00:005B: E6 03        	inc	<L10+i_1+2
+   235                        L10008:
+   236 00:005D: A5 01        	lda	<L10+i_1
+   237 00:005F: C5 0C        	cmp	<L9+size_0
+   238 00:0061: A5 03        	lda	<L10+i_1+2
+   239 00:0063: E5 0E        	sbc	<L9+size_0+2
+   240 00:0065: 90 E6        	bcc	L10007
+   241                        ;	return;
+   242                        	.line	23
+   243 00:0067: A5 06        	lda	<L9+2
+   244 00:0069: 85 10        	sta	<L9+2+10
+   245 00:006B: A5 05        	lda	<L9+1
+   246 00:006D: 85 0F        	sta	<L9+1+10
+   247 00:006F: 2B           	pld
+   248 00:0070: 3B           	tsc
+   249 00:0071: 18           	clc
+   250 00:0072: 69 0E 00     	adc	#L9+10
+   251 00:0075: 1B           	tcs
+   252 00:0076: 6B           	rtl
+   253                        ;}
+   254                        	.line	24
+   255                        	.endblock	24
+   256             00000004   L9	equ	4
+   257             00000001   L10	equ	1
+   258                        	ends
+   259                        	efunc
+   260                        	.endfunc	24,1,4
+   261                        	.line	24
+   262                        ;
+   263                        ;void Clear(far uint8_t *address, uint32_t size)
+   264                        ;{
+   265                        	.line	26
+   266                        	.line	27
+   267                        	code
+   268                        	xdef	~~Clear
+   269                        	func
+   270                        	.function	27
+   271                        ~~Clear:
+  Wed Apr 14 2021  0:19                                                                                                    Page 6
+
+
+   272                        	longa	on
+   273                        	longi	on
+   274 00:0077: 3B           	tsc
+   275 00:0078: 38           	sec
+   276 00:0079: E9 04 00     	sbc	#L15
+   277 00:007C: 1B           	tcs
+   278 00:007D: 0B           	phd
+   279 00:007E: 5B           	tcd
+   280             00000004   address_0	set	4
+   281             00000008   size_0	set	8
+   282                        	.block	27
+   283                        ;	uint32_t i;
+   284                        ;	for(i =0; i<size; i++){
+   285             00000000   i_1	set	0
+   286                        	.sym	i,0,18,1,32
+   287                        	.sym	address,4,142,6,32
+   288                        	.sym	size,8,18,6,32
+   289                        	.line	29
+   290 00:007F: 64 01        	stz	<L16+i_1
+   291 00:0081: 64 03        	stz	<L16+i_1+2
+   292 00:0083: 80 10        	bra	L10012
+   293                        L10011:
+   294                        	.line	29
+   295                        ;		address[i] = 0;
+   296                        	.line	30
+   297 00:0085: E2 20        	sep	#$20
+   298                        	longa	off
+   299 00:0087: A9 00        	lda	#$0
+   300 00:0089: A4 01        	ldy	<L16+i_1
+   301 00:008B: 97 08        	sta	[<L15+address_0],Y
+   302 00:008D: C2 20        	rep	#$20
+   303                        	longa	on
+   304                        ;	}
+   305                        	.line	31
+   306 00:008F: E6 01        	inc	<L16+i_1
+   307 00:0091: D0 02        	bne	L10012
+   308 00:0093: E6 03        	inc	<L16+i_1+2
+   309                        L10012:
+   310 00:0095: A5 01        	lda	<L16+i_1
+   311 00:0097: C5 0C        	cmp	<L15+size_0
+   312 00:0099: A5 03        	lda	<L16+i_1+2
+   313 00:009B: E5 0E        	sbc	<L15+size_0+2
+   314 00:009D: 90 E6        	bcc	L10011
+   315                        ;	return;
+   316                        	.line	32
+   317 00:009F: A5 06        	lda	<L15+2
+   318 00:00A1: 85 0E        	sta	<L15+2+8
+   319 00:00A3: A5 05        	lda	<L15+1
+   320 00:00A5: 85 0D        	sta	<L15+1+8
+   321 00:00A7: 2B           	pld
+   322 00:00A8: 3B           	tsc
+   323 00:00A9: 18           	clc
+   324 00:00AA: 69 0C 00     	adc	#L15+8
+   325 00:00AD: 1B           	tcs
+   326 00:00AE: 6B           	rtl
+   327                        ;}
+   328                        	.line	33
+   329                        	.endblock	33
+  Wed Apr 14 2021  0:19                                                                                                    Page 7
+
+
+   330             00000004   L15	equ	4
+   331             00000001   L16	equ	1
+   332                        	ends
+   333                        	efunc
+   334                        	.endfunc	33,1,4
+   335                        	.line	33
+   336                        ;
+   337                        ;void Print_HEX_8(uint8_t data, uint16_t x, uint16_t y)
+   338                        ;{
+   339                        	.line	35
+   340                        	.line	36
+   341                        	code
+   342                        	xdef	~~Print_HEX_8
+   343                        	func
+   344                        	.function	36
+   345                        ~~Print_HEX_8:
+   346                        	longa	on
+   347                        	longi	on
+   348 00:00AF: 3B           	tsc
+   349 00:00B0: 38           	sec
+   350 00:00B1: E9 0E 00     	sbc	#L21
+   351 00:00B4: 1B           	tcs
+   352 00:00B5: 0B           	phd
+   353 00:00B6: 5B           	tcd
+   354             00000004   data_0	set	4
+   355             00000006   x_0	set	6
+   356             00000008   y_0	set	8
+   357                        	.block	36
+   358                        ;	
+   359                        ;	uint16_t screen_pos = x * 80 + y;
+   360                        ;	
+   361                        ;	SCREEN_PAGE0[screen_pos+2]  = HEX_to_STR[((data >>4) & 0x0F)];
+   362             00000000   screen_pos_1	set	0
+   363                        	.sym	screen_pos,0,16,1,16
+   364                        	.sym	data,4,14,6,8
+   365                        	.sym	x,6,16,6,16
+   366                        	.sym	y,8,16,6,16
+   367 00:00B7: A5 14        	lda	<L21+x_0
+   368 00:00B9: A2 50 00     	ldx	#<$50
+   369                        	xref	~~~mul
+   370 00:00BC: 22 xx xx xx  	jsl	~~~mul
+   371 00:00C0: 18           	clc
+   372 00:00C1: 65 16        	adc	<L21+y_0
+   373 00:00C3: 85 0D        	sta	<L22+screen_pos_1
+   374                        	.line	40
+   375 00:00C5: A9 00 A0     	lda	#$a000
+   376 00:00C8: 85 01        	sta	<R0
+   377 00:00CA: A9 AF 00     	lda	#$af
+   378 00:00CD: 85 03        	sta	<R0+2
+   379 00:00CF: A9 02 00     	lda	#$2
+   380 00:00D2: 18           	clc
+   381 00:00D3: 65 0D        	adc	<L22+screen_pos_1
+   382 00:00D5: 85 05        	sta	<R1
+   383 00:00D7: A5 12        	lda	<L21+data_0
+   384 00:00D9: 29 FF 00     	and	#$ff
+   385 00:00DC: A2 04 00     	ldx	#<$4
+   386                        	xref	~~~asr
+   387 00:00DF: 22 xx xx xx  	jsl	~~~asr
+  Wed Apr 14 2021  0:19                                                                                                    Page 8
+
+
+   388 00:00E3: 29 0F 00     	and	#<$f
+   389 00:00E6: AA           	tax
+   390 00:00E7: E2 20        	sep	#$20
+   391                        	longa	off
+   392 00:00E9: BD xx xx     	lda	|~~HEX_to_STR,X
+   393 00:00EC: A4 05        	ldy	<R1
+   394 00:00EE: 97 01        	sta	[<R0],Y
+   395 00:00F0: C2 20        	rep	#$20
+   396                        	longa	on
+   397                        ;	SCREEN_PAGE0[screen_pos+3]  = HEX_to_STR[(data & 0x0F)];
+   398                        	.line	41
+   399 00:00F2: A9 00 A0     	lda	#$a000
+   400 00:00F5: 85 01        	sta	<R0
+   401 00:00F7: A9 AF 00     	lda	#$af
+   402 00:00FA: 85 03        	sta	<R0+2
+   403 00:00FC: A9 03 00     	lda	#$3
+   404 00:00FF: 18           	clc
+   405 00:0100: 65 0D        	adc	<L22+screen_pos_1
+   406 00:0102: 85 05        	sta	<R1
+   407 00:0104: A5 12        	lda	<L21+data_0
+   408 00:0106: 29 0F 00     	and	#<$f
+   409 00:0109: AA           	tax
+   410 00:010A: E2 20        	sep	#$20
+   411                        	longa	off
+   412 00:010C: BD xx xx     	lda	|~~HEX_to_STR,X
+   413 00:010F: A4 05        	ldy	<R1
+   414 00:0111: 97 01        	sta	[<R0],Y
+   415 00:0113: C2 20        	rep	#$20
+   416                        	longa	on
+   417                        ;	return;
+   418                        	.line	42
+   419 00:0115: A5 10        	lda	<L21+2
+   420 00:0117: 85 16        	sta	<L21+2+6
+   421 00:0119: A5 0F        	lda	<L21+1
+   422 00:011B: 85 15        	sta	<L21+1+6
+   423 00:011D: 2B           	pld
+   424 00:011E: 3B           	tsc
+   425 00:011F: 18           	clc
+   426 00:0120: 69 14 00     	adc	#L21+6
+   427 00:0123: 1B           	tcs
+   428 00:0124: 6B           	rtl
+   429                        ;}
+   430                        	.line	43
+   431                        	.endblock	43
+   432             0000000E   L21	equ	14
+   433             0000000D   L22	equ	13
+   434                        	ends
+   435                        	efunc
+   436                        	.endfunc	43,13,14
+   437                        	.line	43
+   438                        ;
+   439                        ;void Print_HEX_16(uint16_t data, uint16_t x, uint16_t y)
+   440                        ;{
+   441                        	.line	45
+   442                        	.line	46
+   443                        	code
+   444                        	xdef	~~Print_HEX_16
+   445                        	func
+  Wed Apr 14 2021  0:19                                                                                                    Page 9
+
+
+   446                        	.function	46
+   447                        ~~Print_HEX_16:
+   448                        	longa	on
+   449                        	longi	on
+   450 00:0125: 3B           	tsc
+   451 00:0126: 38           	sec
+   452 00:0127: E9 0E 00     	sbc	#L25
+   453 00:012A: 1B           	tcs
+   454 00:012B: 0B           	phd
+   455 00:012C: 5B           	tcd
+   456             00000004   data_0	set	4
+   457             00000006   x_0	set	6
+   458             00000008   y_0	set	8
+   459                        	.block	46
+   460                        ;	
+   461                        ;	uint16_t screen_pos = x * 80 + y;
+   462                        ;	
+   463                        ;	SCREEN_PAGE0[screen_pos+0]  = HEX_to_STR[((data >>12)& 0x0F)];
+   464             00000000   screen_pos_1	set	0
+   465                        	.sym	screen_pos,0,16,1,16
+   466                        	.sym	data,4,16,6,16
+   467                        	.sym	x,6,16,6,16
+   468                        	.sym	y,8,16,6,16
+   469 00:012D: A5 14        	lda	<L25+x_0
+   470 00:012F: A2 50 00     	ldx	#<$50
+   471                        	xref	~~~mul
+   472 00:0132: 22 xx xx xx  	jsl	~~~mul
+   473 00:0136: 18           	clc
+   474 00:0137: 65 16        	adc	<L25+y_0
+   475 00:0139: 85 0D        	sta	<L26+screen_pos_1
+   476                        	.line	50
+   477 00:013B: A9 00 A0     	lda	#$a000
+   478 00:013E: 85 01        	sta	<R0
+   479 00:0140: A9 AF 00     	lda	#$af
+   480 00:0143: 85 03        	sta	<R0+2
+   481 00:0145: A5 12        	lda	<L25+data_0
+   482 00:0147: A2 0C 00     	ldx	#<$c
+   483                        	xref	~~~lsr
+   484 00:014A: 22 xx xx xx  	jsl	~~~lsr
+   485 00:014E: 29 0F 00     	and	#<$f
+   486 00:0151: AA           	tax
+   487 00:0152: E2 20        	sep	#$20
+   488                        	longa	off
+   489 00:0154: BD xx xx     	lda	|~~HEX_to_STR,X
+   490 00:0157: A4 0D        	ldy	<L26+screen_pos_1
+   491 00:0159: 97 01        	sta	[<R0],Y
+   492 00:015B: C2 20        	rep	#$20
+   493                        	longa	on
+   494                        ;	SCREEN_PAGE0[screen_pos+1]  = HEX_to_STR[((data >>8) & 0x0F)];
+   495                        	.line	51
+   496 00:015D: A9 00 A0     	lda	#$a000
+   497 00:0160: 85 01        	sta	<R0
+   498 00:0162: A9 AF 00     	lda	#$af
+   499 00:0165: 85 03        	sta	<R0+2
+   500 00:0167: 98           	tya
+   501 00:0168: 1A           	ina
+   502 00:0169: 85 05        	sta	<R1
+   503 00:016B: A5 12        	lda	<L25+data_0
+  Wed Apr 14 2021  0:19                                                                                                    Page 10
+
+
+   504 00:016D: EB           	xba
+   505 00:016E: 29 FF 00     	and	#$00ff
+   506 00:0171: 29 0F 00     	and	#<$f
+   507 00:0174: AA           	tax
+   508 00:0175: E2 20        	sep	#$20
+   509                        	longa	off
+   510 00:0177: BD xx xx     	lda	|~~HEX_to_STR,X
+   511 00:017A: A4 05        	ldy	<R1
+   512 00:017C: 97 01        	sta	[<R0],Y
+   513 00:017E: C2 20        	rep	#$20
+   514                        	longa	on
+   515                        ;	SCREEN_PAGE0[screen_pos+2]  = HEX_to_STR[((data >>4) & 0x0F)];
+   516                        	.line	52
+   517 00:0180: A9 00 A0     	lda	#$a000
+   518 00:0183: 85 01        	sta	<R0
+   519 00:0185: A9 AF 00     	lda	#$af
+   520 00:0188: 85 03        	sta	<R0+2
+   521 00:018A: A9 02 00     	lda	#$2
+   522 00:018D: 18           	clc
+   523 00:018E: 65 0D        	adc	<L26+screen_pos_1
+   524 00:0190: 85 05        	sta	<R1
+   525 00:0192: A5 12        	lda	<L25+data_0
+   526 00:0194: 4A           	lsr	A
+   527 00:0195: 4A           	lsr	A
+   528 00:0196: 4A           	lsr	A
+   529 00:0197: 4A           	lsr	A
+   530 00:0198: 29 0F 00     	and	#<$f
+   531 00:019B: AA           	tax
+   532 00:019C: E2 20        	sep	#$20
+   533                        	longa	off
+   534 00:019E: BD xx xx     	lda	|~~HEX_to_STR,X
+   535 00:01A1: A4 05        	ldy	<R1
+   536 00:01A3: 97 01        	sta	[<R0],Y
+   537 00:01A5: C2 20        	rep	#$20
+   538                        	longa	on
+   539                        ;	SCREEN_PAGE0[screen_pos+3]  = HEX_to_STR[(data & 0x0F)];
+   540                        	.line	53
+   541 00:01A7: A9 00 A0     	lda	#$a000
+   542 00:01AA: 85 01        	sta	<R0
+   543 00:01AC: A9 AF 00     	lda	#$af
+   544 00:01AF: 85 03        	sta	<R0+2
+   545 00:01B1: A9 03 00     	lda	#$3
+   546 00:01B4: 18           	clc
+   547 00:01B5: 65 0D        	adc	<L26+screen_pos_1
+   548 00:01B7: 85 05        	sta	<R1
+   549 00:01B9: A5 12        	lda	<L25+data_0
+   550 00:01BB: 29 0F 00     	and	#<$f
+   551 00:01BE: AA           	tax
+   552 00:01BF: E2 20        	sep	#$20
+   553                        	longa	off
+   554 00:01C1: BD xx xx     	lda	|~~HEX_to_STR,X
+   555 00:01C4: A4 05        	ldy	<R1
+   556 00:01C6: 97 01        	sta	[<R0],Y
+   557 00:01C8: C2 20        	rep	#$20
+   558                        	longa	on
+   559                        ;	return;
+   560                        	.line	54
+   561 00:01CA: A5 10        	lda	<L25+2
+  Wed Apr 14 2021  0:19                                                                                                    Page 11
+
+
+   562 00:01CC: 85 16        	sta	<L25+2+6
+   563 00:01CE: A5 0F        	lda	<L25+1
+   564 00:01D0: 85 15        	sta	<L25+1+6
+   565 00:01D2: 2B           	pld
+   566 00:01D3: 3B           	tsc
+   567 00:01D4: 18           	clc
+   568 00:01D5: 69 14 00     	adc	#L25+6
+   569 00:01D8: 1B           	tcs
+   570 00:01D9: 6B           	rtl
+   571                        ;}
+   572                        	.line	55
+   573                        	.endblock	55
+   574             0000000E   L25	equ	14
+   575             0000000D   L26	equ	13
+   576                        	ends
+   577                        	efunc
+   578                        	.endfunc	55,13,14
+   579                        	.line	55
+   580                        ;
+   581                        ;void Print_UINT_8(uint8_t num, uint16_t x, uint16_t y)
+   582                        ;{
+   583                        	.line	57
+   584                        	.line	58
+   585                        	code
+   586                        	xdef	~~Print_UINT_8
+   587                        	func
+   588                        	.function	58
+   589                        ~~Print_UINT_8:
+   590                        	longa	on
+   591                        	longi	on
+   592 00:01DA: 3B           	tsc
+   593 00:01DB: 38           	sec
+   594 00:01DC: E9 0F 00     	sbc	#L29
+   595 00:01DF: 1B           	tcs
+   596 00:01E0: 0B           	phd
+   597 00:01E1: 5B           	tcd
+   598             00000004   num_0	set	4
+   599             00000006   x_0	set	6
+   600             00000008   y_0	set	8
+   601                        	.block	58
+   602                        ;	uint8_t decimal_number[3],i;
+   603                        ;	uint16_t screen_pos = x * 80 + y;
+   604                        ;	
+   605                        ;	for(i = 0; i<3; i++)
+   606             00000000   decimal_number_1	set	0
+   607             00000003   i_1	set	3
+   608             00000004   screen_pos_1	set	4
+   609                        	.sym	decimal_number,0,110,1,0,3
+   610                        	.sym	i,3,14,1,8
+   611                        	.sym	screen_pos,4,16,1,16
+   612                        	.sym	num,4,14,6,8
+   613                        	.sym	x,6,16,6,16
+   614                        	.sym	y,8,16,6,16
+   615 00:01E2: A5 15        	lda	<L29+x_0
+   616 00:01E4: A2 50 00     	ldx	#<$50
+   617                        	xref	~~~mul
+   618 00:01E7: 22 xx xx xx  	jsl	~~~mul
+   619 00:01EB: 18           	clc
+  Wed Apr 14 2021  0:19                                                                                                    Page 12
+
+
+   620 00:01EC: 65 17        	adc	<L29+y_0
+   621 00:01EE: 85 0D        	sta	<L30+screen_pos_1
+   622                        	.line	62
+   623 00:01F0: E2 20        	sep	#$20
+   624                        	longa	off
+   625 00:01F2: 64 0C        	stz	<L30+i_1
+   626 00:01F4: C2 20        	rep	#$20
+   627                        	longa	on
+   628 00:01F6: 80 52        	bra	L10016
+   629                        L10015:
+   630                        ;    {
+   631                        	.line	63
+   632                        ;		
+   633                        ;        uint8_t rem = num % 10;
+   634                        ;        decimal_number[i] = rem + '0';
+   635                        	.block	66
+   636             00000006   rem_2	set	6
+   637                        	.sym	rem,6,14,1,8
+   638 00:01F8: A5 13        	lda	<L29+num_0
+   639 00:01FA: 29 FF 00     	and	#$ff
+   640 00:01FD: A2 0A 00     	ldx	#<$a
+   641                        	xref	~~~mod
+   642 00:0200: 22 xx xx xx  	jsl	~~~mod
+   643 00:0204: E2 20        	sep	#$20
+   644                        	longa	off
+   645 00:0206: 85 0F        	sta	<L30+rem_2
+   646 00:0208: C2 20        	rep	#$20
+   647                        	longa	on
+   648                        	.line	66
+   649 00:020A: A5 0C        	lda	<L30+i_1
+   650 00:020C: 29 FF 00     	and	#$ff
+   651 00:020F: AA           	tax
+   652 00:0210: E2 20        	sep	#$20
+   653                        	longa	off
+   654 00:0212: A9 30        	lda	#$30
+   655 00:0214: 18           	clc
+   656 00:0215: 65 0F        	adc	<L30+rem_2
+   657 00:0217: 95 09        	sta	<L30+decimal_number_1,X
+   658 00:0219: C2 20        	rep	#$20
+   659                        	longa	on
+   660                        ;        num = num/10;
+   661                        	.line	67
+   662 00:021B: A5 13        	lda	<L29+num_0
+   663 00:021D: 29 FF 00     	and	#$ff
+   664 00:0220: A2 0A 00     	ldx	#<$a
+   665                        	xref	~~~div
+   666 00:0223: 22 xx xx xx  	jsl	~~~div
+   667 00:0227: E2 20        	sep	#$20
+   668                        	longa	off
+   669 00:0229: 85 13        	sta	<L29+num_0
+   670 00:022B: C2 20        	rep	#$20
+   671                        	longa	on
+   672                        ;		
+   673                        ;		SCREEN_PAGE0[screen_pos + i] = 0;
+   674                        	.line	69
+   675 00:022D: A5 0C        	lda	<L30+i_1
+   676 00:022F: 29 FF 00     	and	#$ff
+   677 00:0232: 18           	clc
+  Wed Apr 14 2021  0:19                                                                                                    Page 13
+
+
+   678 00:0233: 65 0D        	adc	<L30+screen_pos_1
+   679 00:0235: A8           	tay
+   680 00:0236: A9 00 A0     	lda	#$a000
+   681 00:0239: 85 01        	sta	<R0
+   682 00:023B: A9 AF 00     	lda	#$af
+   683 00:023E: 85 03        	sta	<R0+2
+   684 00:0240: E2 20        	sep	#$20
+   685                        	longa	off
+   686 00:0242: A9 00        	lda	#$0
+   687 00:0244: 97 01        	sta	[<R0],Y
+   688                        ;    }
+   689                        	.endblock	70
+   690                        	.line	70
+   691 00:0246: E6 0C        	inc	<L30+i_1
+   692 00:0248: C2 20        	rep	#$20
+   693                        	longa	on
+   694                        L10016:
+   695 00:024A: E2 20        	sep	#$20
+   696                        	longa	off
+   697 00:024C: A5 0C        	lda	<L30+i_1
+   698 00:024E: C9 03        	cmp	#<$3
+   699 00:0250: C2 20        	rep	#$20
+   700                        	longa	on
+   701 00:0252: 90 A4        	bcc	L10015
+   702                        ;	
+   703                        ;	SCREEN_PAGE0[screen_pos+0]  = decimal_number[2];
+   704                        	.line	72
+   705 00:0254: A9 00 A0     	lda	#$a000
+   706 00:0257: 85 01        	sta	<R0
+   707 00:0259: A9 AF 00     	lda	#$af
+   708 00:025C: 85 03        	sta	<R0+2
+   709 00:025E: E2 20        	sep	#$20
+   710                        	longa	off
+   711 00:0260: A5 0B        	lda	<L30+decimal_number_1+2
+   712 00:0262: A4 0D        	ldy	<L30+screen_pos_1
+   713 00:0264: 97 01        	sta	[<R0],Y
+   714 00:0266: C2 20        	rep	#$20
+   715                        	longa	on
+   716                        ;	SCREEN_PAGE0[screen_pos+1]  = decimal_number[1];
+   717                        	.line	73
+   718 00:0268: A9 00 A0     	lda	#$a000
+   719 00:026B: 85 01        	sta	<R0
+   720 00:026D: A9 AF 00     	lda	#$af
+   721 00:0270: 85 03        	sta	<R0+2
+   722 00:0272: 98           	tya
+   723 00:0273: 1A           	ina
+   724 00:0274: A8           	tay
+   725 00:0275: E2 20        	sep	#$20
+   726                        	longa	off
+   727 00:0277: A5 0A        	lda	<L30+decimal_number_1+1
+   728 00:0279: 97 01        	sta	[<R0],Y
+   729 00:027B: C2 20        	rep	#$20
+   730                        	longa	on
+   731                        ;	SCREEN_PAGE0[screen_pos+2]  = decimal_number[0];
+   732                        	.line	74
+   733 00:027D: A9 00 A0     	lda	#$a000
+   734 00:0280: 85 01        	sta	<R0
+   735 00:0282: A9 AF 00     	lda	#$af
+  Wed Apr 14 2021  0:19                                                                                                    Page 14
+
+
+   736 00:0285: 85 03        	sta	<R0+2
+   737 00:0287: A9 02 00     	lda	#$2
+   738 00:028A: 18           	clc
+   739 00:028B: 65 0D        	adc	<L30+screen_pos_1
+   740 00:028D: A8           	tay
+   741 00:028E: E2 20        	sep	#$20
+   742                        	longa	off
+   743 00:0290: A5 09        	lda	<L30+decimal_number_1
+   744 00:0292: 97 01        	sta	[<R0],Y
+   745 00:0294: C2 20        	rep	#$20
+   746                        	longa	on
+   747                        ;	return;
+   748                        	.line	75
+   749 00:0296: A5 11        	lda	<L29+2
+   750 00:0298: 85 17        	sta	<L29+2+6
+   751 00:029A: A5 10        	lda	<L29+1
+   752 00:029C: 85 16        	sta	<L29+1+6
+   753 00:029E: 2B           	pld
+   754 00:029F: 3B           	tsc
+   755 00:02A0: 18           	clc
+   756 00:02A1: 69 15 00     	adc	#L29+6
+   757 00:02A4: 1B           	tcs
+   758 00:02A5: 6B           	rtl
+   759                        ;}
+   760                        	.line	76
+   761                        	.endblock	76
+   762             0000000F   L29	equ	15
+   763             00000009   L30	equ	9
+   764                        	ends
+   765                        	efunc
+   766                        	.endfunc	76,9,15
+   767                        	.line	76
+   768                        ;
+   769                        ;void Print_UINT_16(uint16_t num, uint16_t x, uint16_t y)
+   770                        ;{
+   771                        	.line	78
+   772                        	.line	79
+   773                        	code
+   774                        	xdef	~~Print_UINT_16
+   775                        	func
+   776                        	.function	79
+   777                        ~~Print_UINT_16:
+   778                        	longa	on
+   779                        	longi	on
+   780 00:02A6: 3B           	tsc
+   781 00:02A7: 38           	sec
+   782 00:02A8: E9 1A 00     	sbc	#L35
+   783 00:02AB: 1B           	tcs
+   784 00:02AC: 0B           	phd
+   785 00:02AD: 5B           	tcd
+   786             00000004   num_0	set	4
+   787             00000006   x_0	set	6
+   788             00000008   y_0	set	8
+   789                        	.block	79
+   790                        ;	uint8_t decimal_number[5],i, print_flag = 0;
+   791                        ;	uint16_t screen_pos = x * 80 + y;
+   792                        ;
+   793                        ;	for(i = 0; i<5; i++)
+  Wed Apr 14 2021  0:19                                                                                                    Page 15
+
+
+   794             00000000   decimal_number_1	set	0
+   795             00000005   i_1	set	5
+   796             00000006   print_flag_1	set	6
+   797             00000007   screen_pos_1	set	7
+   798                        	.sym	decimal_number,0,110,1,0,5
+   799                        	.sym	i,5,14,1,8
+   800                        	.sym	print_flag,6,14,1,8
+   801                        	.sym	screen_pos,7,16,1,16
+   802                        	.sym	num,4,16,6,16
+   803                        	.sym	x,6,16,6,16
+   804                        	.sym	y,8,16,6,16
+   805 00:02AE: E2 20        	sep	#$20
+   806                        	longa	off
+   807 00:02B0: 64 17        	stz	<L36+print_flag_1
+   808 00:02B2: C2 20        	rep	#$20
+   809                        	longa	on
+   810 00:02B4: A5 20        	lda	<L35+x_0
+   811 00:02B6: A2 50 00     	ldx	#<$50
+   812                        	xref	~~~mul
+   813 00:02B9: 22 xx xx xx  	jsl	~~~mul
+   814 00:02BD: 18           	clc
+   815 00:02BE: 65 22        	adc	<L35+y_0
+   816 00:02C0: 85 18        	sta	<L36+screen_pos_1
+   817                        	.line	83
+   818 00:02C2: E2 20        	sep	#$20
+   819                        	longa	off
+   820 00:02C4: 64 16        	stz	<L36+i_1
+   821 00:02C6: C2 20        	rep	#$20
+   822                        	longa	on
+   823 00:02C8: 80 31        	bra	L10020
+   824                        L10019:
+   825                        ;    {
+   826                        	.line	84
+   827                        ;        uint8_t rem = num % 10;
+   828                        ;        decimal_number[i] = rem + '0';
+   829                        	.block	86
+   830             00000009   rem_2	set	9
+   831                        	.sym	rem,9,14,1,8
+   832 00:02CA: A5 1E        	lda	<L35+num_0
+   833 00:02CC: A2 0A 00     	ldx	#<$a
+   834                        	xref	~~~umd
+   835 00:02CF: 22 xx xx xx  	jsl	~~~umd
+   836 00:02D3: E2 20        	sep	#$20
+   837                        	longa	off
+   838 00:02D5: 85 1A        	sta	<L36+rem_2
+   839 00:02D7: C2 20        	rep	#$20
+   840                        	longa	on
+   841                        	.line	86
+   842 00:02D9: A5 16        	lda	<L36+i_1
+   843 00:02DB: 29 FF 00     	and	#$ff
+   844 00:02DE: AA           	tax
+   845 00:02DF: E2 20        	sep	#$20
+   846                        	longa	off
+   847 00:02E1: A9 30        	lda	#$30
+   848 00:02E3: 18           	clc
+   849 00:02E4: 65 1A        	adc	<L36+rem_2
+   850 00:02E6: 95 11        	sta	<L36+decimal_number_1,X
+   851 00:02E8: C2 20        	rep	#$20
+  Wed Apr 14 2021  0:19                                                                                                    Page 16
+
+
+   852                        	longa	on
+   853                        ;        num = num/10;
+   854                        	.line	87
+   855 00:02EA: A5 1E        	lda	<L35+num_0
+   856 00:02EC: A2 0A 00     	ldx	#<$a
+   857                        	xref	~~~udv
+   858 00:02EF: 22 xx xx xx  	jsl	~~~udv
+   859 00:02F3: 85 1E        	sta	<L35+num_0
+   860                        ;    }
+   861                        	.endblock	88
+   862                        	.line	88
+   863 00:02F5: E2 20        	sep	#$20
+   864                        	longa	off
+   865 00:02F7: E6 16        	inc	<L36+i_1
+   866 00:02F9: C2 20        	rep	#$20
+   867                        	longa	on
+   868                        L10020:
+   869 00:02FB: E2 20        	sep	#$20
+   870                        	longa	off
+   871 00:02FD: A5 16        	lda	<L36+i_1
+   872 00:02FF: C9 05        	cmp	#<$5
+   873 00:0301: C2 20        	rep	#$20
+   874                        	longa	on
+   875 00:0303: 90 C5        	bcc	L10019
+   876                        ;	
+   877                        ;	for(i = 0; i<5; i++)
+   878                        	.line	90
+   879 00:0305: E2 20        	sep	#$20
+   880                        	longa	off
+   881 00:0307: 64 16        	stz	<L36+i_1
+   882 00:0309: C2 20        	rep	#$20
+   883                        	longa	on
+   884 00:030B: 82 83 00     	brl	L10024
+   885                        L10023:
+   886                        ;    {
+   887                        	.line	91
+   888                        ;		if((decimal_number[4-i]!='0') || (print_flag == 1))
+   889                        	.line	92
+   890                        ;		{
+   891 00:030E: A5 16        	lda	<L36+i_1
+   892 00:0310: 29 FF 00     	and	#$ff
+   893 00:0313: 85 01        	sta	<R0
+   894 00:0315: 38           	sec
+   895 00:0316: A9 04 00     	lda	#$4
+   896 00:0319: E5 01        	sbc	<R0
+   897 00:031B: AA           	tax
+   898 00:031C: E2 20        	sep	#$20
+   899                        	longa	off
+   900 00:031E: B5 11        	lda	<L36+decimal_number_1,X
+   901 00:0320: C9 30        	cmp	#<$30
+   902 00:0322: C2 20        	rep	#$20
+   903                        	longa	on
+   904 00:0324: D0 0A        	bne	L40
+   905 00:0326: E2 20        	sep	#$20
+   906                        	longa	off
+   907 00:0328: A5 17        	lda	<L36+print_flag_1
+   908 00:032A: C9 01        	cmp	#<$1
+   909 00:032C: C2 20        	rep	#$20
+  Wed Apr 14 2021  0:19                                                                                                    Page 17
+
+
+   910                        	longa	on
+   911 00:032E: D0 3B        	bne	L10025
+   912                        L40:
+   913                        	.line	93
+   914                        ;			print_flag = 1;
+   915                        	.line	94
+   916 00:0330: E2 20        	sep	#$20
+   917                        	longa	off
+   918 00:0332: A9 01        	lda	#$1
+   919 00:0334: 85 17        	sta	<L36+print_flag_1
+   920 00:0336: C2 20        	rep	#$20
+   921                        	longa	on
+   922                        ;			SCREEN_PAGE0[screen_pos +1 +i] = decimal_number[4-i];
+   923                        	.line	95
+   924 00:0338: A5 16        	lda	<L36+i_1
+   925 00:033A: 29 FF 00     	and	#$ff
+   926 00:033D: 18           	clc
+   927 00:033E: 65 18        	adc	<L36+screen_pos_1
+   928 00:0340: 85 05        	sta	<R1
+   929 00:0342: A9 00 A0     	lda	#$a000
+   930 00:0345: 85 01        	sta	<R0
+   931 00:0347: A9 AF 00     	lda	#$af
+   932 00:034A: 85 03        	sta	<R0+2
+   933 00:034C: A5 05        	lda	<R1
+   934 00:034E: 1A           	ina
+   935 00:034F: 85 09        	sta	<R2
+   936 00:0351: A5 16        	lda	<L36+i_1
+   937 00:0353: 29 FF 00     	and	#$ff
+   938 00:0356: 85 05        	sta	<R1
+   939 00:0358: 38           	sec
+   940 00:0359: A9 04 00     	lda	#$4
+   941 00:035C: E5 05        	sbc	<R1
+   942 00:035E: AA           	tax
+   943 00:035F: E2 20        	sep	#$20
+   944                        	longa	off
+   945 00:0361: B5 11        	lda	<L36+decimal_number_1,X
+   946 00:0363: A4 09        	ldy	<R2
+   947 00:0365: 97 01        	sta	[<R0],Y
+   948 00:0367: C2 20        	rep	#$20
+   949                        	longa	on
+   950                        ;		}
+   951                        	.line	96
+   952                        ;		else
+   953 00:0369: 80 20        	bra	L10021
+   954                        L10025:
+   955                        ;			SCREEN_PAGE0[screen_pos +1 +i] = 0;
+   956                        	.line	98
+   957 00:036B: A5 16        	lda	<L36+i_1
+   958 00:036D: 29 FF 00     	and	#$ff
+   959 00:0370: 18           	clc
+   960 00:0371: 65 18        	adc	<L36+screen_pos_1
+   961 00:0373: 85 05        	sta	<R1
+   962 00:0375: A9 00 A0     	lda	#$a000
+   963 00:0378: 85 01        	sta	<R0
+   964 00:037A: A9 AF 00     	lda	#$af
+   965 00:037D: 85 03        	sta	<R0+2
+   966 00:037F: A5 05        	lda	<R1
+   967 00:0381: 1A           	ina
+  Wed Apr 14 2021  0:19                                                                                                    Page 18
+
+
+   968 00:0382: A8           	tay
+   969 00:0383: E2 20        	sep	#$20
+   970                        	longa	off
+   971 00:0385: A9 00        	lda	#$0
+   972 00:0387: 97 01        	sta	[<R0],Y
+   973 00:0389: C2 20        	rep	#$20
+   974                        	longa	on
+   975                        ;    }
+   976                        	.line	99
+   977                        L10021:
+   978 00:038B: E2 20        	sep	#$20
+   979                        	longa	off
+   980 00:038D: E6 16        	inc	<L36+i_1
+   981 00:038F: C2 20        	rep	#$20
+   982                        	longa	on
+   983                        L10024:
+   984 00:0391: E2 20        	sep	#$20
+   985                        	longa	off
+   986 00:0393: A5 16        	lda	<L36+i_1
+   987 00:0395: C9 05        	cmp	#<$5
+   988 00:0397: C2 20        	rep	#$20
+   989                        	longa	on
+   990 00:0399: B0 03        	bcs	*+5
+   991 00:039B: 82 70 FF     	brl	L10023
+   992                        ;	
+   993                        ;	if(print_flag == 0)
+   994                        	.line	101
+   995                        ;		SCREEN_PAGE0[screen_pos +5] = '0';
+   996 00:039E: A5 17        	lda	<L36+print_flag_1
+   997 00:03A0: 29 FF 00     	and	#$ff
+   998 00:03A3: D0 19        	bne	L45
+   999                        	.line	102
+  1000 00:03A5: A9 00 A0     	lda	#$a000
+  1001 00:03A8: 85 01        	sta	<R0
+  1002 00:03AA: A9 AF 00     	lda	#$af
+  1003 00:03AD: 85 03        	sta	<R0+2
+  1004 00:03AF: A9 05 00     	lda	#$5
+  1005 00:03B2: 18           	clc
+  1006 00:03B3: 65 18        	adc	<L36+screen_pos_1
+  1007 00:03B5: A8           	tay
+  1008 00:03B6: E2 20        	sep	#$20
+  1009                        	longa	off
+  1010 00:03B8: A9 30        	lda	#$30
+  1011 00:03BA: 97 01        	sta	[<R0],Y
+  1012 00:03BC: C2 20        	rep	#$20
+  1013                        	longa	on
+  1014                        ;	return;
+  1015                        	.line	103
+  1016                        L45:
+  1017 00:03BE: A5 1C        	lda	<L35+2
+  1018 00:03C0: 85 22        	sta	<L35+2+6
+  1019 00:03C2: A5 1B        	lda	<L35+1
+  1020 00:03C4: 85 21        	sta	<L35+1+6
+  1021 00:03C6: 2B           	pld
+  1022 00:03C7: 3B           	tsc
+  1023 00:03C8: 18           	clc
+  1024 00:03C9: 69 20 00     	adc	#L35+6
+  1025 00:03CC: 1B           	tcs
+  Wed Apr 14 2021  0:19                                                                                                    Page 19
+
+
+  1026 00:03CD: 6B           	rtl
+  1027                        ;}
+  1028                        	.line	104
+  1029                        	.endblock	104
+  1030             0000001A   L35	equ	26
+  1031             00000011   L36	equ	17
+  1032                        	ends
+  1033                        	efunc
+  1034                        	.endfunc	104,17,26
+  1035                        	.line	104
+  1036                        ;
+  1037                        ;void Print_INT_8(int8_t num, uint16_t x, uint16_t y)
+  1038                        ;{
+  1039                        	.line	106
+  1040                        	.line	107
+  1041                        	code
+  1042                        	xdef	~~Print_INT_8
+  1043                        	func
+  1044                        	.function	107
+  1045                        ~~Print_INT_8:
+  1046                        	longa	on
+  1047                        	longi	on
+  1048 00:03CE: 3B           	tsc
+  1049 00:03CF: 38           	sec
+  1050 00:03D0: E9 1A 00     	sbc	#L46
+  1051 00:03D3: 1B           	tcs
+  1052 00:03D4: 0B           	phd
+  1053 00:03D5: 5B           	tcd
+  1054             00000004   num_0	set	4
+  1055             00000006   x_0	set	6
+  1056             00000008   y_0	set	8
+  1057                        	.block	107
+  1058                        ;	uint8_t decimal_number[5],i, print_flag = 0;
+  1059                        ;	uint16_t screen_pos = x * 80 + y;
+  1060                        ;	
+  1061                        ;	if(num<0)
+  1062             00000000   decimal_number_1	set	0
+  1063             00000005   i_1	set	5
+  1064             00000006   print_flag_1	set	6
+  1065             00000007   screen_pos_1	set	7
+  1066                        	.sym	decimal_number,0,110,1,0,5
+  1067                        	.sym	i,5,14,1,8
+  1068                        	.sym	print_flag,6,14,1,8
+  1069                        	.sym	screen_pos,7,16,1,16
+  1070                        	.sym	num,4,2,6,8
+  1071                        	.sym	x,6,16,6,16
+  1072                        	.sym	y,8,16,6,16
+  1073 00:03D6: E2 20        	sep	#$20
+  1074                        	longa	off
+  1075 00:03D8: 64 17        	stz	<L47+print_flag_1
+  1076 00:03DA: C2 20        	rep	#$20
+  1077                        	longa	on
+  1078 00:03DC: A5 20        	lda	<L46+x_0
+  1079 00:03DE: A2 50 00     	ldx	#<$50
+  1080                        	xref	~~~mul
+  1081 00:03E1: 22 xx xx xx  	jsl	~~~mul
+  1082 00:03E5: 85 01        	sta	<R0
+  1083 00:03E7: 18           	clc
+  Wed Apr 14 2021  0:19                                                                                                    Page 20
+
+
+  1084 00:03E8: 65 22        	adc	<L46+y_0
+  1085 00:03EA: 85 18        	sta	<L47+screen_pos_1
+  1086                        	.line	111
+  1087                        ;	{
+  1088 00:03EC: A5 1E        	lda	<L46+num_0
+  1089 00:03EE: 89 80 00     	bit	#$80
+  1090 00:03F1: F0 21        	beq	L10028
+  1091                        	.line	112
+  1092                        ;		num = -num;
+  1093                        	.line	113
+  1094 00:03F3: E2 20        	sep	#$20
+  1095                        	longa	off
+  1096 00:03F5: 38           	sec
+  1097 00:03F6: A9 00        	lda	#$0
+  1098 00:03F8: E5 1E        	sbc	<L46+num_0
+  1099 00:03FA: 85 1E        	sta	<L46+num_0
+  1100 00:03FC: C2 20        	rep	#$20
+  1101                        	longa	on
+  1102                        ;		SCREEN_PAGE0[screen_pos + 0]  = '-';
+  1103                        	.line	114
+  1104 00:03FE: A9 00 A0     	lda	#$a000
+  1105 00:0401: 85 01        	sta	<R0
+  1106 00:0403: A9 AF 00     	lda	#$af
+  1107 00:0406: 85 03        	sta	<R0+2
+  1108 00:0408: E2 20        	sep	#$20
+  1109                        	longa	off
+  1110 00:040A: A9 2D        	lda	#$2d
+  1111 00:040C: A4 18        	ldy	<L47+screen_pos_1
+  1112 00:040E: 97 01        	sta	[<R0],Y
+  1113 00:0410: C2 20        	rep	#$20
+  1114                        	longa	on
+  1115                        ;	}
+  1116                        	.line	115
+  1117                        ;	else
+  1118 00:0412: 80 14        	bra	L10029
+  1119                        L10028:
+  1120                        ;		SCREEN_PAGE0[screen_pos + 0]  = 0;	
+  1121                        	.line	117
+  1122 00:0414: A9 00 A0     	lda	#$a000
+  1123 00:0417: 85 01        	sta	<R0
+  1124 00:0419: A9 AF 00     	lda	#$af
+  1125 00:041C: 85 03        	sta	<R0+2
+  1126 00:041E: E2 20        	sep	#$20
+  1127                        	longa	off
+  1128 00:0420: A9 00        	lda	#$0
+  1129 00:0422: A4 18        	ldy	<L47+screen_pos_1
+  1130 00:0424: 97 01        	sta	[<R0],Y
+  1131 00:0426: C2 20        	rep	#$20
+  1132                        	longa	on
+  1133                        L10029:
+  1134                        ;	
+  1135                        ;	for(i = 0; i<3; i++)
+  1136                        	.line	119
+  1137 00:0428: E2 20        	sep	#$20
+  1138                        	longa	off
+  1139 00:042A: 64 16        	stz	<L47+i_1
+  1140 00:042C: C2 20        	rep	#$20
+  1141                        	longa	on
+  Wed Apr 14 2021  0:19                                                                                                    Page 21
+
+
+  1142 00:042E: 80 47        	bra	L10033
+  1143                        L10032:
+  1144                        ;    {
+  1145                        	.line	120
+  1146                        ;        uint8_t rem = num % 10;
+  1147                        ;        decimal_number[i] = rem + '0';
+  1148                        	.block	122
+  1149             00000009   rem_2	set	9
+  1150                        	.sym	rem,9,14,1,8
+  1151 00:0430: A5 1E        	lda	<L46+num_0
+  1152 00:0432: 29 FF 00     	and	#$ff
+  1153 00:0435: 89 80 00     	bit	#$80
+  1154 00:0438: F0 03        	beq	L51
+  1155 00:043A: 09 00 FF     	ora	#$ff00
+  1156                        L51:
+  1157 00:043D: A2 0A 00     	ldx	#<$a
+  1158                        	xref	~~~mod
+  1159 00:0440: 22 xx xx xx  	jsl	~~~mod
+  1160 00:0444: E2 20        	sep	#$20
+  1161                        	longa	off
+  1162 00:0446: 85 1A        	sta	<L47+rem_2
+  1163 00:0448: C2 20        	rep	#$20
+  1164                        	longa	on
+  1165                        	.line	122
+  1166 00:044A: A5 16        	lda	<L47+i_1
+  1167 00:044C: 29 FF 00     	and	#$ff
+  1168 00:044F: AA           	tax
+  1169 00:0450: E2 20        	sep	#$20
+  1170                        	longa	off
+  1171 00:0452: A9 30        	lda	#$30
+  1172 00:0454: 18           	clc
+  1173 00:0455: 65 1A        	adc	<L47+rem_2
+  1174 00:0457: 95 11        	sta	<L47+decimal_number_1,X
+  1175 00:0459: C2 20        	rep	#$20
+  1176                        	longa	on
+  1177                        ;        num = num/10;
+  1178                        	.line	123
+  1179 00:045B: A5 1E        	lda	<L46+num_0
+  1180 00:045D: 29 FF 00     	and	#$ff
+  1181 00:0460: 89 80 00     	bit	#$80
+  1182 00:0463: F0 03        	beq	L52
+  1183 00:0465: 09 00 FF     	ora	#$ff00
+  1184                        L52:
+  1185 00:0468: A2 0A 00     	ldx	#<$a
+  1186                        	xref	~~~div
+  1187 00:046B: 22 xx xx xx  	jsl	~~~div
+  1188 00:046F: E2 20        	sep	#$20
+  1189                        	longa	off
+  1190 00:0471: 85 1E        	sta	<L46+num_0
+  1191                        ;    }
+  1192                        	.endblock	124
+  1193                        	.line	124
+  1194 00:0473: E6 16        	inc	<L47+i_1
+  1195 00:0475: C2 20        	rep	#$20
+  1196                        	longa	on
+  1197                        L10033:
+  1198 00:0477: E2 20        	sep	#$20
+  1199                        	longa	off
+  Wed Apr 14 2021  0:19                                                                                                    Page 22
+
+
+  1200 00:0479: A5 16        	lda	<L47+i_1
+  1201 00:047B: C9 03        	cmp	#<$3
+  1202 00:047D: C2 20        	rep	#$20
+  1203                        	longa	on
+  1204 00:047F: 90 AF        	bcc	L10032
+  1205                        ;	
+  1206                        ;	for(i = 0; i<3; i++)
+  1207                        	.line	126
+  1208 00:0481: E2 20        	sep	#$20
+  1209                        	longa	off
+  1210 00:0483: 64 16        	stz	<L47+i_1
+  1211 00:0485: C2 20        	rep	#$20
+  1212                        	longa	on
+  1213 00:0487: 82 83 00     	brl	L10037
+  1214                        L10036:
+  1215                        ;    {
+  1216                        	.line	127
+  1217                        ;		if((decimal_number[2-i]!='0') || (print_flag == 1))
+  1218                        	.line	128
+  1219                        ;		{
+  1220 00:048A: A5 16        	lda	<L47+i_1
+  1221 00:048C: 29 FF 00     	and	#$ff
+  1222 00:048F: 85 01        	sta	<R0
+  1223 00:0491: 38           	sec
+  1224 00:0492: A9 02 00     	lda	#$2
+  1225 00:0495: E5 01        	sbc	<R0
+  1226 00:0497: AA           	tax
+  1227 00:0498: E2 20        	sep	#$20
+  1228                        	longa	off
+  1229 00:049A: B5 11        	lda	<L47+decimal_number_1,X
+  1230 00:049C: C9 30        	cmp	#<$30
+  1231 00:049E: C2 20        	rep	#$20
+  1232                        	longa	on
+  1233 00:04A0: D0 0A        	bne	L54
+  1234 00:04A2: E2 20        	sep	#$20
+  1235                        	longa	off
+  1236 00:04A4: A5 17        	lda	<L47+print_flag_1
+  1237 00:04A6: C9 01        	cmp	#<$1
+  1238 00:04A8: C2 20        	rep	#$20
+  1239                        	longa	on
+  1240 00:04AA: D0 3B        	bne	L10038
+  1241                        L54:
+  1242                        	.line	129
+  1243                        ;			print_flag = 1;
+  1244                        	.line	130
+  1245 00:04AC: E2 20        	sep	#$20
+  1246                        	longa	off
+  1247 00:04AE: A9 01        	lda	#$1
+  1248 00:04B0: 85 17        	sta	<L47+print_flag_1
+  1249 00:04B2: C2 20        	rep	#$20
+  1250                        	longa	on
+  1251                        ;			SCREEN_PAGE0[screen_pos +1 +i] = decimal_number[2-i];
+  1252                        	.line	131
+  1253 00:04B4: A5 16        	lda	<L47+i_1
+  1254 00:04B6: 29 FF 00     	and	#$ff
+  1255 00:04B9: 18           	clc
+  1256 00:04BA: 65 18        	adc	<L47+screen_pos_1
+  1257 00:04BC: 85 05        	sta	<R1
+  Wed Apr 14 2021  0:19                                                                                                    Page 23
+
+
+  1258 00:04BE: A9 00 A0     	lda	#$a000
+  1259 00:04C1: 85 01        	sta	<R0
+  1260 00:04C3: A9 AF 00     	lda	#$af
+  1261 00:04C6: 85 03        	sta	<R0+2
+  1262 00:04C8: A5 05        	lda	<R1
+  1263 00:04CA: 1A           	ina
+  1264 00:04CB: 85 09        	sta	<R2
+  1265 00:04CD: A5 16        	lda	<L47+i_1
+  1266 00:04CF: 29 FF 00     	and	#$ff
+  1267 00:04D2: 85 05        	sta	<R1
+  1268 00:04D4: 38           	sec
+  1269 00:04D5: A9 02 00     	lda	#$2
+  1270 00:04D8: E5 05        	sbc	<R1
+  1271 00:04DA: AA           	tax
+  1272 00:04DB: E2 20        	sep	#$20
+  1273                        	longa	off
+  1274 00:04DD: B5 11        	lda	<L47+decimal_number_1,X
+  1275 00:04DF: A4 09        	ldy	<R2
+  1276 00:04E1: 97 01        	sta	[<R0],Y
+  1277 00:04E3: C2 20        	rep	#$20
+  1278                        	longa	on
+  1279                        ;		}
+  1280                        	.line	132
+  1281                        ;		else
+  1282 00:04E5: 80 20        	bra	L10034
+  1283                        L10038:
+  1284                        ;			SCREEN_PAGE0[screen_pos +1 +i] = 0;
+  1285                        	.line	134
+  1286 00:04E7: A5 16        	lda	<L47+i_1
+  1287 00:04E9: 29 FF 00     	and	#$ff
+  1288 00:04EC: 18           	clc
+  1289 00:04ED: 65 18        	adc	<L47+screen_pos_1
+  1290 00:04EF: 85 05        	sta	<R1
+  1291 00:04F1: A9 00 A0     	lda	#$a000
+  1292 00:04F4: 85 01        	sta	<R0
+  1293 00:04F6: A9 AF 00     	lda	#$af
+  1294 00:04F9: 85 03        	sta	<R0+2
+  1295 00:04FB: A5 05        	lda	<R1
+  1296 00:04FD: 1A           	ina
+  1297 00:04FE: A8           	tay
+  1298 00:04FF: E2 20        	sep	#$20
+  1299                        	longa	off
+  1300 00:0501: A9 00        	lda	#$0
+  1301 00:0503: 97 01        	sta	[<R0],Y
+  1302 00:0505: C2 20        	rep	#$20
+  1303                        	longa	on
+  1304                        ;    }
+  1305                        	.line	135
+  1306                        L10034:
+  1307 00:0507: E2 20        	sep	#$20
+  1308                        	longa	off
+  1309 00:0509: E6 16        	inc	<L47+i_1
+  1310 00:050B: C2 20        	rep	#$20
+  1311                        	longa	on
+  1312                        L10037:
+  1313 00:050D: E2 20        	sep	#$20
+  1314                        	longa	off
+  1315 00:050F: A5 16        	lda	<L47+i_1
+  Wed Apr 14 2021  0:19                                                                                                    Page 24
+
+
+  1316 00:0511: C9 03        	cmp	#<$3
+  1317 00:0513: C2 20        	rep	#$20
+  1318                        	longa	on
+  1319 00:0515: B0 03        	bcs	*+5
+  1320 00:0517: 82 70 FF     	brl	L10036
+  1321                        ;	
+  1322                        ;	if(print_flag == 0)
+  1323                        	.line	137
+  1324                        ;		SCREEN_PAGE0[screen_pos +3] = '0';
+  1325 00:051A: A5 17        	lda	<L47+print_flag_1
+  1326 00:051C: 29 FF 00     	and	#$ff
+  1327 00:051F: D0 19        	bne	L59
+  1328                        	.line	138
+  1329 00:0521: A9 00 A0     	lda	#$a000
+  1330 00:0524: 85 01        	sta	<R0
+  1331 00:0526: A9 AF 00     	lda	#$af
+  1332 00:0529: 85 03        	sta	<R0+2
+  1333 00:052B: A9 03 00     	lda	#$3
+  1334 00:052E: 18           	clc
+  1335 00:052F: 65 18        	adc	<L47+screen_pos_1
+  1336 00:0531: A8           	tay
+  1337 00:0532: E2 20        	sep	#$20
+  1338                        	longa	off
+  1339 00:0534: A9 30        	lda	#$30
+  1340 00:0536: 97 01        	sta	[<R0],Y
+  1341 00:0538: C2 20        	rep	#$20
+  1342                        	longa	on
+  1343                        ;	
+  1344                        ;	return;
+  1345                        	.line	140
+  1346                        L59:
+  1347 00:053A: A5 1C        	lda	<L46+2
+  1348 00:053C: 85 22        	sta	<L46+2+6
+  1349 00:053E: A5 1B        	lda	<L46+1
+  1350 00:0540: 85 21        	sta	<L46+1+6
+  1351 00:0542: 2B           	pld
+  1352 00:0543: 3B           	tsc
+  1353 00:0544: 18           	clc
+  1354 00:0545: 69 20 00     	adc	#L46+6
+  1355 00:0548: 1B           	tcs
+  1356 00:0549: 6B           	rtl
+  1357                        ;}
+  1358                        	.line	141
+  1359                        	.endblock	141
+  1360             0000001A   L46	equ	26
+  1361             00000011   L47	equ	17
+  1362                        	ends
+  1363                        	efunc
+  1364                        	.endfunc	141,17,26
+  1365                        	.line	141
+  1366                        ;
+  1367                        ;void Print_INT_16(int16_t num, uint16_t x, uint16_t y)
+  1368                        ;{
+  1369                        	.line	143
+  1370                        	.line	144
+  1371                        	code
+  1372                        	xdef	~~Print_INT_16
+  1373                        	func
+  Wed Apr 14 2021  0:19                                                                                                    Page 25
+
+
+  1374                        	.function	144
+  1375                        ~~Print_INT_16:
+  1376                        	longa	on
+  1377                        	longi	on
+  1378 00:054A: 3B           	tsc
+  1379 00:054B: 38           	sec
+  1380 00:054C: E9 1A 00     	sbc	#L60
+  1381 00:054F: 1B           	tcs
+  1382 00:0550: 0B           	phd
+  1383 00:0551: 5B           	tcd
+  1384             00000004   num_0	set	4
+  1385             00000006   x_0	set	6
+  1386             00000008   y_0	set	8
+  1387                        	.block	144
+  1388                        ;	uint8_t decimal_number[5],i, print_flag = 0;
+  1389                        ;	uint16_t screen_pos = x * 80 + y;
+  1390                        ;	
+  1391                        ;	if(num<0)
+  1392             00000000   decimal_number_1	set	0
+  1393             00000005   i_1	set	5
+  1394             00000006   print_flag_1	set	6
+  1395             00000007   screen_pos_1	set	7
+  1396                        	.sym	decimal_number,0,110,1,0,5
+  1397                        	.sym	i,5,14,1,8
+  1398                        	.sym	print_flag,6,14,1,8
+  1399                        	.sym	screen_pos,7,16,1,16
+  1400                        	.sym	num,4,5,6,16
+  1401                        	.sym	x,6,16,6,16
+  1402                        	.sym	y,8,16,6,16
+  1403 00:0552: E2 20        	sep	#$20
+  1404                        	longa	off
+  1405 00:0554: 64 17        	stz	<L61+print_flag_1
+  1406 00:0556: C2 20        	rep	#$20
+  1407                        	longa	on
+  1408 00:0558: A5 20        	lda	<L60+x_0
+  1409 00:055A: A2 50 00     	ldx	#<$50
+  1410                        	xref	~~~mul
+  1411 00:055D: 22 xx xx xx  	jsl	~~~mul
+  1412 00:0561: 18           	clc
+  1413 00:0562: 65 22        	adc	<L60+y_0
+  1414 00:0564: 85 18        	sta	<L61+screen_pos_1
+  1415                        	.line	148
+  1416                        ;	{
+  1417 00:0566: A5 1E        	lda	<L60+num_0
+  1418 00:0568: 10 1E        	bpl	L10041
+  1419                        	.line	149
+  1420                        ;		num = -num;
+  1421                        	.line	150
+  1422 00:056A: 38           	sec
+  1423 00:056B: A9 00 00     	lda	#$0
+  1424 00:056E: E5 1E        	sbc	<L60+num_0
+  1425 00:0570: 85 1E        	sta	<L60+num_0
+  1426                        ;		SCREEN_PAGE0[screen_pos + 0]  = '-';
+  1427                        	.line	151
+  1428 00:0572: A9 00 A0     	lda	#$a000
+  1429 00:0575: 85 01        	sta	<R0
+  1430 00:0577: A9 AF 00     	lda	#$af
+  1431 00:057A: 85 03        	sta	<R0+2
+  Wed Apr 14 2021  0:19                                                                                                    Page 26
+
+
+  1432 00:057C: E2 20        	sep	#$20
+  1433                        	longa	off
+  1434 00:057E: A9 2D        	lda	#$2d
+  1435 00:0580: A4 18        	ldy	<L61+screen_pos_1
+  1436 00:0582: 97 01        	sta	[<R0],Y
+  1437 00:0584: C2 20        	rep	#$20
+  1438                        	longa	on
+  1439                        ;	}
+  1440                        	.line	152
+  1441                        ;	else
+  1442 00:0586: 80 14        	bra	L10042
+  1443                        L10041:
+  1444                        ;		SCREEN_PAGE0[screen_pos + 0]  = 0;	
+  1445                        	.line	154
+  1446 00:0588: A9 00 A0     	lda	#$a000
+  1447 00:058B: 85 01        	sta	<R0
+  1448 00:058D: A9 AF 00     	lda	#$af
+  1449 00:0590: 85 03        	sta	<R0+2
+  1450 00:0592: E2 20        	sep	#$20
+  1451                        	longa	off
+  1452 00:0594: A9 00        	lda	#$0
+  1453 00:0596: A4 18        	ldy	<L61+screen_pos_1
+  1454 00:0598: 97 01        	sta	[<R0],Y
+  1455 00:059A: C2 20        	rep	#$20
+  1456                        	longa	on
+  1457                        L10042:
+  1458                        ;	
+  1459                        ;	for(i = 0; i<5; i++)
+  1460                        	.line	156
+  1461 00:059C: E2 20        	sep	#$20
+  1462                        	longa	off
+  1463 00:059E: 64 16        	stz	<L61+i_1
+  1464 00:05A0: C2 20        	rep	#$20
+  1465                        	longa	on
+  1466 00:05A2: 80 31        	bra	L10046
+  1467                        L10045:
+  1468                        ;    {
+  1469                        	.line	157
+  1470                        ;        uint8_t rem = num % 10;
+  1471                        ;        decimal_number[i] = rem + '0';
+  1472                        	.block	159
+  1473             00000009   rem_2	set	9
+  1474                        	.sym	rem,9,14,1,8
+  1475 00:05A4: A5 1E        	lda	<L60+num_0
+  1476 00:05A6: A2 0A 00     	ldx	#<$a
+  1477                        	xref	~~~mod
+  1478 00:05A9: 22 xx xx xx  	jsl	~~~mod
+  1479 00:05AD: E2 20        	sep	#$20
+  1480                        	longa	off
+  1481 00:05AF: 85 1A        	sta	<L61+rem_2
+  1482 00:05B1: C2 20        	rep	#$20
+  1483                        	longa	on
+  1484                        	.line	159
+  1485 00:05B3: A5 16        	lda	<L61+i_1
+  1486 00:05B5: 29 FF 00     	and	#$ff
+  1487 00:05B8: AA           	tax
+  1488 00:05B9: E2 20        	sep	#$20
+  1489                        	longa	off
+  Wed Apr 14 2021  0:19                                                                                                    Page 27
+
+
+  1490 00:05BB: A9 30        	lda	#$30
+  1491 00:05BD: 18           	clc
+  1492 00:05BE: 65 1A        	adc	<L61+rem_2
+  1493 00:05C0: 95 11        	sta	<L61+decimal_number_1,X
+  1494 00:05C2: C2 20        	rep	#$20
+  1495                        	longa	on
+  1496                        ;        num = num/10;
+  1497                        	.line	160
+  1498 00:05C4: A5 1E        	lda	<L60+num_0
+  1499 00:05C6: A2 0A 00     	ldx	#<$a
+  1500                        	xref	~~~div
+  1501 00:05C9: 22 xx xx xx  	jsl	~~~div
+  1502 00:05CD: 85 1E        	sta	<L60+num_0
+  1503                        ;    }
+  1504                        	.endblock	161
+  1505                        	.line	161
+  1506 00:05CF: E2 20        	sep	#$20
+  1507                        	longa	off
+  1508 00:05D1: E6 16        	inc	<L61+i_1
+  1509 00:05D3: C2 20        	rep	#$20
+  1510                        	longa	on
+  1511                        L10046:
+  1512 00:05D5: E2 20        	sep	#$20
+  1513                        	longa	off
+  1514 00:05D7: A5 16        	lda	<L61+i_1
+  1515 00:05D9: C9 05        	cmp	#<$5
+  1516 00:05DB: C2 20        	rep	#$20
+  1517                        	longa	on
+  1518 00:05DD: 90 C5        	bcc	L10045
+  1519                        ;	
+  1520                        ;	for(i = 0; i<5; i++)
+  1521                        	.line	163
+  1522 00:05DF: E2 20        	sep	#$20
+  1523                        	longa	off
+  1524 00:05E1: 64 16        	stz	<L61+i_1
+  1525 00:05E3: C2 20        	rep	#$20
+  1526                        	longa	on
+  1527 00:05E5: 82 83 00     	brl	L10050
+  1528                        L10049:
+  1529                        ;    {
+  1530                        	.line	164
+  1531                        ;		if((decimal_number[4-i]!='0') || (print_flag == 1))
+  1532                        	.line	165
+  1533                        ;		{
+  1534 00:05E8: A5 16        	lda	<L61+i_1
+  1535 00:05EA: 29 FF 00     	and	#$ff
+  1536 00:05ED: 85 01        	sta	<R0
+  1537 00:05EF: 38           	sec
+  1538 00:05F0: A9 04 00     	lda	#$4
+  1539 00:05F3: E5 01        	sbc	<R0
+  1540 00:05F5: AA           	tax
+  1541 00:05F6: E2 20        	sep	#$20
+  1542                        	longa	off
+  1543 00:05F8: B5 11        	lda	<L61+decimal_number_1,X
+  1544 00:05FA: C9 30        	cmp	#<$30
+  1545 00:05FC: C2 20        	rep	#$20
+  1546                        	longa	on
+  1547 00:05FE: D0 0A        	bne	L66
+  Wed Apr 14 2021  0:19                                                                                                    Page 28
+
+
+  1548 00:0600: E2 20        	sep	#$20
+  1549                        	longa	off
+  1550 00:0602: A5 17        	lda	<L61+print_flag_1
+  1551 00:0604: C9 01        	cmp	#<$1
+  1552 00:0606: C2 20        	rep	#$20
+  1553                        	longa	on
+  1554 00:0608: D0 3B        	bne	L10051
+  1555                        L66:
+  1556                        	.line	166
+  1557                        ;			print_flag = 1;
+  1558                        	.line	167
+  1559 00:060A: E2 20        	sep	#$20
+  1560                        	longa	off
+  1561 00:060C: A9 01        	lda	#$1
+  1562 00:060E: 85 17        	sta	<L61+print_flag_1
+  1563 00:0610: C2 20        	rep	#$20
+  1564                        	longa	on
+  1565                        ;			SCREEN_PAGE0[screen_pos +1 +i] = decimal_number[4-i];
+  1566                        	.line	168
+  1567 00:0612: A5 16        	lda	<L61+i_1
+  1568 00:0614: 29 FF 00     	and	#$ff
+  1569 00:0617: 18           	clc
+  1570 00:0618: 65 18        	adc	<L61+screen_pos_1
+  1571 00:061A: 85 05        	sta	<R1
+  1572 00:061C: A9 00 A0     	lda	#$a000
+  1573 00:061F: 85 01        	sta	<R0
+  1574 00:0621: A9 AF 00     	lda	#$af
+  1575 00:0624: 85 03        	sta	<R0+2
+  1576 00:0626: A5 05        	lda	<R1
+  1577 00:0628: 1A           	ina
+  1578 00:0629: 85 09        	sta	<R2
+  1579 00:062B: A5 16        	lda	<L61+i_1
+  1580 00:062D: 29 FF 00     	and	#$ff
+  1581 00:0630: 85 05        	sta	<R1
+  1582 00:0632: 38           	sec
+  1583 00:0633: A9 04 00     	lda	#$4
+  1584 00:0636: E5 05        	sbc	<R1
+  1585 00:0638: AA           	tax
+  1586 00:0639: E2 20        	sep	#$20
+  1587                        	longa	off
+  1588 00:063B: B5 11        	lda	<L61+decimal_number_1,X
+  1589 00:063D: A4 09        	ldy	<R2
+  1590 00:063F: 97 01        	sta	[<R0],Y
+  1591 00:0641: C2 20        	rep	#$20
+  1592                        	longa	on
+  1593                        ;		}
+  1594                        	.line	169
+  1595                        ;		else
+  1596 00:0643: 80 20        	bra	L10047
+  1597                        L10051:
+  1598                        ;			SCREEN_PAGE0[screen_pos +1 +i] = 0;
+  1599                        	.line	171
+  1600 00:0645: A5 16        	lda	<L61+i_1
+  1601 00:0647: 29 FF 00     	and	#$ff
+  1602 00:064A: 18           	clc
+  1603 00:064B: 65 18        	adc	<L61+screen_pos_1
+  1604 00:064D: 85 05        	sta	<R1
+  1605 00:064F: A9 00 A0     	lda	#$a000
+  Wed Apr 14 2021  0:19                                                                                                    Page 29
+
+
+  1606 00:0652: 85 01        	sta	<R0
+  1607 00:0654: A9 AF 00     	lda	#$af
+  1608 00:0657: 85 03        	sta	<R0+2
+  1609 00:0659: A5 05        	lda	<R1
+  1610 00:065B: 1A           	ina
+  1611 00:065C: A8           	tay
+  1612 00:065D: E2 20        	sep	#$20
+  1613                        	longa	off
+  1614 00:065F: A9 00        	lda	#$0
+  1615 00:0661: 97 01        	sta	[<R0],Y
+  1616 00:0663: C2 20        	rep	#$20
+  1617                        	longa	on
+  1618                        ;    }
+  1619                        	.line	172
+  1620                        L10047:
+  1621 00:0665: E2 20        	sep	#$20
+  1622                        	longa	off
+  1623 00:0667: E6 16        	inc	<L61+i_1
+  1624 00:0669: C2 20        	rep	#$20
+  1625                        	longa	on
+  1626                        L10050:
+  1627 00:066B: E2 20        	sep	#$20
+  1628                        	longa	off
+  1629 00:066D: A5 16        	lda	<L61+i_1
+  1630 00:066F: C9 05        	cmp	#<$5
+  1631 00:0671: C2 20        	rep	#$20
+  1632                        	longa	on
+  1633 00:0673: B0 03        	bcs	*+5
+  1634 00:0675: 82 70 FF     	brl	L10049
+  1635                        ;	
+  1636                        ;	if(print_flag == 0)
+  1637                        	.line	174
+  1638                        ;		SCREEN_PAGE0[screen_pos +5] = '0';
+  1639 00:0678: A5 17        	lda	<L61+print_flag_1
+  1640 00:067A: 29 FF 00     	and	#$ff
+  1641 00:067D: D0 19        	bne	L71
+  1642                        	.line	175
+  1643 00:067F: A9 00 A0     	lda	#$a000
+  1644 00:0682: 85 01        	sta	<R0
+  1645 00:0684: A9 AF 00     	lda	#$af
+  1646 00:0687: 85 03        	sta	<R0+2
+  1647 00:0689: A9 05 00     	lda	#$5
+  1648 00:068C: 18           	clc
+  1649 00:068D: 65 18        	adc	<L61+screen_pos_1
+  1650 00:068F: A8           	tay
+  1651 00:0690: E2 20        	sep	#$20
+  1652                        	longa	off
+  1653 00:0692: A9 30        	lda	#$30
+  1654 00:0694: 97 01        	sta	[<R0],Y
+  1655 00:0696: C2 20        	rep	#$20
+  1656                        	longa	on
+  1657                        ;	
+  1658                        ;	return;
+  1659                        	.line	177
+  1660                        L71:
+  1661 00:0698: A5 1C        	lda	<L60+2
+  1662 00:069A: 85 22        	sta	<L60+2+6
+  1663 00:069C: A5 1B        	lda	<L60+1
+  Wed Apr 14 2021  0:19                                                                                                    Page 30
+
+
+  1664 00:069E: 85 21        	sta	<L60+1+6
+  1665 00:06A0: 2B           	pld
+  1666 00:06A1: 3B           	tsc
+  1667 00:06A2: 18           	clc
+  1668 00:06A3: 69 20 00     	adc	#L60+6
+  1669 00:06A6: 1B           	tcs
+  1670 00:06A7: 6B           	rtl
+  1671                        ;}
+  1672                        	.line	178
+  1673                        	.endblock	178
+  1674             0000001A   L60	equ	26
+  1675             00000011   L61	equ	17
+  1676                        	ends
+  1677                        	efunc
+  1678                        	.endfunc	178,17,26
+  1679                        	.line	178
+  1680                        ;
+  1681                        	.line	178
+  1682                        	.file	"D:\Old_PC\C256\FMX\Project\Half_Life_Genesis_C\Half_Life_code\Util.c",143
+  1683                        	.sym	~~HEX_to_STR,~~HEX_to_STR,110,2,0,16
+  1684                        	.sym	~~Print_INT_16,~~Print_INT_16,65,2,0
+  1685                        	.sym	~~Print_INT_8,~~Print_INT_8,65,2,0
+  1686                        	.sym	~~Print_UINT_16,~~Print_UINT_16,65,2,0
+  1687                        	.sym	~~Print_UINT_8,~~Print_UINT_8,65,2,0
+  1688                        	.sym	~~Print_HEX_16,~~Print_HEX_16,65,2,0
+  1689                        	.sym	~~Print_HEX_8,~~Print_HEX_8,65,2,0
+  1690                        	.sym	~~Clear,~~Clear,65,2,0
+  1691                        	.sym	~~Set,~~Set,65,2,0
+  1692                        	.sym	~~Copy,~~Copy,65,2,0
+  1693                        	.sym	acia_t,0,10,14,32,4
+  1694                        	.sym	pia_t,0,10,14,32,3
+  1695                        	.sym	via_t,0,10,14,128,2
+  1696                        	.sym	imaxdiv_t,0,10,14,64,1
+  1697                        	.sym	uintmax_t,0,18,14,32
+  1698                        	.sym	intmax_t,0,7,14,32
+  1699                        	.sym	uintptr_t,0,16,14,16
+  1700                        	.sym	intptr_t,0,5,14,16
+  1701                        	.sym	uint32_t,0,18,14,32
+  1702                        	.sym	int32_t,0,7,14,32
+  1703                        	.sym	uint16_t,0,16,14,16
+  1704                        	.sym	int16_t,0,5,14,16
+  1705                        	.sym	uint8_t,0,14,14,8
+  1706                        	.sym	int8_t,0,2,14,8
+  1707                        	.sym	wchar_t,0,14,14,8
+
+
+      Lines assembled: 1707
+      Errors: 0
